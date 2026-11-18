@@ -8,9 +8,8 @@ import { CampaignButton } from "@/components/site/campaign"
 export function Hero() {
   return (
     <section id="top" className="bg-[#014fce] text-white">
-      <div className="relative mx-auto hidden w-full max-w-[1440px] overflow-hidden [container-type:inline-size] lg:block">
-        <div className="relative aspect-[1440/951] w-full">
-          <div className="absolute top-0 left-0 h-[951px] w-[1440px] origin-top-left [transform:scale(calc(100cqw/1440))]">
+      <div className="relative hidden w-full overflow-hidden [container-type:inline-size] lg:block">
+        <div className="h-[951px] w-[1440px] [zoom:calc(100cqw/1440px)]">
             <DotField />
             <ProductPreview className="absolute top-[277px] left-[624px] z-[2] h-[720px] w-[1058px]" />
             <Mountain className="absolute top-[570px] left-0 z-[2] h-[381px] w-[1440px]" />
@@ -19,7 +18,6 @@ export function Hero() {
               Trusted By
             </p>
             <Header className="absolute top-[16px] left-[24px] z-[4] h-[44px] w-[1392px]" />
-          </div>
         </div>
       </div>
 

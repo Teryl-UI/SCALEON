@@ -75,12 +75,12 @@ export function SignalSection() {
   const stats = ["3", "2", "1"]
   return (
     <section id="signal" className="bg-white px-6 py-16 sm:px-10 lg:px-8 lg:py-16">
-      <div className="mx-auto grid max-w-[1376px] items-center gap-12 lg:grid-cols-[485px_1fr]">
+      <div className="mx-auto grid w-full max-w-[1376px] items-center gap-12 2xl:max-w-[1760px] lg:grid-cols-[minmax(0,485px)_1fr]">
         <div className="max-w-[485px]">
           <p className="text-base font-semibold text-[#e57243]">
             THE GULF’S OUTBOUND GROWTH SYSTEM
           </p>
-          <h2 className="mt-4 font-heading text-[clamp(36px,4.5vw,52px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
+          <h2 className="mt-4 font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
             From first signal
             <br />
             to closed deal.
@@ -119,9 +119,9 @@ export function OperatingSection() {
 
   return (
     <section id="system" className="bg-[#f9f9f7] px-4 py-16 sm:px-8 lg:px-10">
-      <div className="mx-auto max-w-[1242px] text-center">
+      <div className="mx-auto w-full max-w-[1242px] text-center 2xl:max-w-[1600px]">
         <p className="text-base font-semibold text-[#e57243]">FROM POSITION TO PIPELINE</p>
-        <h2 className="mt-4 font-heading text-[clamp(36px,4.5vw,52px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
+        <h2 className="mt-4 font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
           One operating view.
           <br />
           Four compounding moves.
@@ -131,7 +131,7 @@ export function OperatingSection() {
           commercial conversations.
         </p>
       </div>
-      <div className="mx-auto mt-10 grid max-w-[1242px] sm:grid-cols-4" role="tablist">
+      <div className="mx-auto mt-10 grid w-full max-w-[1242px] sm:grid-cols-4 2xl:max-w-[1600px]" role="tablist">
         {stages.map((item, index) => {
           const selected = index === active
           return (
@@ -158,10 +158,10 @@ export function OperatingSection() {
           )
         })}
       </div>
-      <div className="mx-auto grid max-w-[1242px] items-center gap-8 bg-white px-4 py-10 lg:grid-cols-[485px_1fr] lg:px-6 lg:py-16">
+      <div className="mx-auto grid w-full max-w-[1242px] items-center gap-8 bg-white px-4 py-10 2xl:max-w-[1600px] lg:grid-cols-[minmax(0,485px)_1fr] lg:px-6 lg:py-16">
         <div>
           <p className="text-base font-semibold text-[#e57243]">{stage.label}</p>
-          <h3 className="mt-6 font-heading text-[clamp(32px,4vw,52px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
+          <h3 className="mt-6 font-heading text-[clamp(32px,3.61vw,68px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
             {stage.title}
           </h3>
           <p className="mt-2 text-base leading-6 text-[#666]">{stage.body}</p>
@@ -331,9 +331,9 @@ export function PipelineSection() {
 
   return (
     <section id="pipeline" className="bg-white px-6 py-16 sm:px-10">
-      <div className="mx-auto max-w-[1376px]">
+      <div className="mx-auto w-full max-w-[1376px] 2xl:max-w-[1760px]">
         <p className="text-base font-semibold text-[#e57243]">COMPOUNDING GROWTH</p>
-        <h2 className="mt-4 max-w-[16ch] font-heading text-[clamp(36px,4.5vw,52px)] leading-[1.23] font-medium tracking-[-0.02em]">
+        <h2 className="mt-4 max-w-[16ch] font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em]">
           <span className="text-[#111]">From first angle to</span>
           <br />
           <span className="text-[#c5c9d1]">compound pipeline</span>
@@ -432,10 +432,10 @@ export function PipelineSection() {
 export function GrowthSection() {
   return (
     <section id="growth" className="overflow-hidden bg-white px-6 py-16 sm:px-10">
-      <div className="mx-auto grid max-w-[1376px] items-end gap-8 lg:grid-cols-2">
+      <div className="mx-auto grid w-full max-w-[1376px] items-end gap-8 2xl:max-w-[1760px] lg:grid-cols-2">
         <div>
           <p className="text-base font-semibold text-[#e57243]">COMPOUNDING GROWTH</p>
-          <h2 className="mt-4 font-heading text-[clamp(36px,4.5vw,52px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
+          <h2 className="mt-4 font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
             From first touch to
             <br />
             long-term customer.
@@ -451,7 +451,7 @@ export function GrowthSection() {
           </div>
         </div>
       </div>
-      <div className="relative mx-auto mt-10 h-[420px] max-w-[1300px] sm:h-[520px]">
+      <div className="relative mx-auto mt-10 h-[420px] w-full max-w-[1300px] sm:h-[520px] 2xl:h-[640px] 2xl:max-w-[1760px]">
         <span className="absolute top-8 bottom-8 left-0 w-2 bg-[#0754ea]" />
         <Image
           src="/figma/funnel-b.svg"
@@ -505,7 +505,8 @@ export function ReviewsSection() {
 
   return (
     <section id="proof" className="bg-[#f8f8f7] px-6 py-10 sm:px-10">
-      <h2 className="font-heading text-[clamp(36px,4.5vw,52px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
+      <div className="mx-auto w-full max-w-[1376px] 2xl:max-w-[1760px]">
+      <h2 className="font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
         What our customers say
       </h2>
       <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -529,6 +530,7 @@ export function ReviewsSection() {
             className={`h-1 flex-1 ${page === index ? "bg-[#e8472a]" : "bg-[#d9dee5]"}`}
           />
         ))}
+      </div>
       </div>
     </section>
   )
@@ -557,9 +559,9 @@ export function SignupSection() {
         className="absolute top-[-3.74%] left-0 h-[156.83%] w-full max-w-none object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[rgba(7,84,234,0.6)] via-[rgba(7,84,234,0.38)] via-48% to-[rgba(0,5,15,0.27)]" />
-      <div className="relative mx-auto max-w-[1360px] px-6 py-20 sm:px-10">
+      <div className="relative mx-auto w-full max-w-[1360px] px-6 py-20 sm:px-10 2xl:max-w-[1760px]">
         <p className="text-sm font-medium text-[#dbeb47]">THE MOST ADAPTABLE WEB</p>
-        <h2 className="mt-3 max-w-[850px] font-heading text-[clamp(36px,4.5vw,52px)] leading-[1.23] font-medium tracking-[-0.02em]">
+        <h2 className="mt-3 max-w-[850px] font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em]">
           From planning to
           <br />
           completion, we’ve got you.
