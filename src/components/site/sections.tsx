@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, type ReactNode } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -118,58 +118,64 @@ export function OperatingSection() {
   const stage = stages[active]
 
   return (
-    <section id="system" className="bg-[#f9f9f7] px-4 py-16 sm:px-8 lg:px-10">
-      <div className="mx-auto w-full max-w-[1242px] text-center 2xl:max-w-[1600px]">
-        <p className="text-base font-semibold text-[#e57243]">FROM POSITION TO PIPELINE</p>
-        <h2 className="mt-4 font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
+    <section id="system" className="overflow-x-clip bg-[#f9f9f7] px-4 py-16 sm:px-8 lg:px-6">
+      <div className="mx-auto w-full max-w-[840px] text-center">
+        <p className="text-base leading-5 font-semibold text-[#e57243]">FROM POSITION TO PIPELINE</p>
+        <h2 className="mt-4 font-heading text-[clamp(36px,3.6vw,52px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111] lg:leading-[64px] lg:tracking-[-1.04px]">
           One operating view.
           <br />
           Four compounding moves.
         </h2>
-        <p className="mx-auto mt-4 max-w-[720px] text-base leading-6 text-[#666]">
+        <p className="mx-auto mt-4 max-w-[824px] text-base leading-6 text-[#666]">
           Choose a stage to see how Scaleon turns a point of view into qualified
           commercial conversations.
         </p>
       </div>
-      <div className="mx-auto mt-10 grid w-full max-w-[1242px] sm:grid-cols-4 2xl:max-w-[1600px]" role="tablist">
-        {stages.map((item, index) => {
-          const selected = index === active
-          return (
-            <button
-              key={item.id}
-              type="button"
-              role="tab"
-              aria-selected={selected}
-              onClick={() => setActive(index)}
-              className={`flex h-[94px] items-center gap-3 px-6 text-left sm:px-8 ${
-                selected
-                  ? "bg-[#0b50e9] text-white"
-                  : "border-l border-[#e5e5e5] bg-white text-[#0d0d0d]"
-              }`}
-            >
-              <span className={`text-xs ${selected ? "text-white" : "text-[#9b9b9b]"}`}>
-                {item.when}
-              </span>
-              <span className="font-heading text-base uppercase">{item.label}</span>
-              <span className={`ml-auto text-sm ${selected ? "text-white" : "text-[#9b9b9b]"}`}>
-                →
-              </span>
-            </button>
-          )
-        })}
-      </div>
-      <div className="mx-auto grid w-full max-w-[1242px] items-center gap-8 bg-white px-4 py-10 2xl:max-w-[1600px] lg:grid-cols-[minmax(0,485px)_1fr] lg:px-6 lg:py-16">
-        <div>
-          <p className="text-base font-semibold text-[#e57243]">{stage.label}</p>
-          <h3 className="mt-6 font-heading text-[clamp(32px,3.61vw,68px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
-            {stage.title}
-          </h3>
-          <p className="mt-2 text-base leading-6 text-[#666]">{stage.body}</p>
-          <div className="mt-6">
-            <CampaignButton tone="blue" />
-          </div>
+      <div className="mx-auto mt-10 w-full max-w-[1242px] bg-white">
+        <div className="grid sm:grid-cols-4" role="tablist">
+          {stages.map((item, index) => {
+            const selected = index === active
+            return (
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                onClick={() => setActive(index)}
+                className={`flex h-[94px] items-center gap-3 px-6 text-left sm:px-8 ${
+                  selected
+                    ? "bg-[#0b50e9] text-white"
+                    : "border-l border-[#e5e5e5] bg-white text-[#0d0d0d]"
+                }`}
+              >
+                <span className={`text-xs ${selected ? "text-white" : "text-[#9b9b9b]"}`}>
+                  {item.when}
+                </span>
+                <span className="font-heading text-base uppercase">{item.label}</span>
+                <span className={`ml-auto text-sm ${selected ? "text-white" : "text-[#9b9b9b]"}`}>
+                  →
+                </span>
+              </button>
+            )
+          })}
         </div>
-        <StageVisual id={stage.id} />
+        <div className="grid items-center gap-8 px-4 py-10 lg:min-h-[616px] lg:grid-cols-[485px_minmax(0,1fr)] lg:px-6 lg:py-16">
+          <div className="flex flex-col gap-8 lg:gap-16">
+            <p className="text-base leading-5 font-semibold text-[#e57243]">{stage.label}</p>
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-2">
+                <h3 className="font-heading text-[clamp(32px,3.6vw,52px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111] lg:leading-[64px] lg:tracking-[-1.04px]">
+                  {stage.title}
+                </h3>
+                <p className="text-base leading-6 text-[#666]">{stage.body}</p>
+              </div>
+              <div>
+                <CampaignButton tone="blue" />
+              </div>
+            </div>
+          </div>
+          <StageVisual id={stage.id} />
+        </div>
       </div>
     </section>
   )
@@ -182,96 +188,184 @@ function StageVisual({ id }: { id: (typeof stages)[number]["id"] }) {
   return <PositionCards />
 }
 
-function Bars({ heights }: { heights: number[] }) {
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+function MonthBars({ heights, lift = 0 }: { heights: number[]; lift?: number }) {
   return (
-    <div className="mt-4 flex h-28 items-end gap-1.5">
-      {heights.map((height, index) => (
-        <span
-          key={index}
-          className="w-3 bg-gradient-to-t from-[#8dc9fb] to-[#0b50e9]"
-          style={{ height: `${height}%` }}
-        />
-      ))}
+    <div className="mt-auto px-3 pb-1">
+      <div className="flex h-[168px] items-end gap-[5px]">
+        {heights.map((height, index) => (
+          <span
+            key={months[index]}
+            className={`w-[14px] bg-gradient-to-b from-white via-[#c5e4fd] ${
+              index === 5 ? "to-[#3677ce]" : "to-[#85c5fa]"
+            }`}
+            style={{ height, marginBottom: index % 4 === 2 ? lift : 0 }}
+          />
+        ))}
+      </div>
+      <div className="mt-1 flex justify-between text-[7px] leading-[14px] text-[#c8c8c8]">
+        {months.map((month) => (
+          <span key={month}>{month}</span>
+        ))}
+      </div>
     </div>
   )
 }
 
-function PositionCards() {
-  const cards = [
-    {
-      title: "PROOF",
-      label: "Case Proof",
-      note: "Numerous meeting carried on the deck they trust",
-      className: "top-0 right-0",
-    },
-    {
-      title: "SIGNALS",
-      label: "Lead Magnet",
-      note: "Hiring and Funding say when it is time to reach out",
-      className: "top-16 right-10",
-    },
-    {
-      title: "TARGETS",
-      label: "Lead Magnet",
-      note: "Name the industries and Gulf roles the first line meets.",
-      className: "top-32 left-0",
-    },
-  ]
+function TrendBadge() {
   return (
-    <div className="relative grid gap-4 lg:block lg:min-h-[460px]">
-      {cards.map((card) => (
-        <article
-          key={card.title}
-          className={`w-full rounded-[21px] border border-[#e5e5e5] bg-gradient-to-br from-[#8dc9fb] via-white to-white p-5 shadow-sm lg:absolute lg:w-[280px] ${card.className}`}
-        >
-          <p className="font-heading text-lg text-[#211d25]">{card.title}</p>
-          <div className="mt-3 flex items-center justify-between text-sm text-[#787b80]">
-            <span>{card.label}</span>
-            <span className="bg-[#e7faf3] px-1.5 py-0.5 text-[11px] text-[#23d592]">20%</span>
-          </div>
-          <p className="mt-2 text-sm text-[#abb2bc]">{card.note}</p>
-          <Bars heights={[40, 62, 48, 80, 55, 90, 70, 44, 76, 58]} />
-          <p className="mt-2 text-xs text-[#a4a4a4]">
-            {card.title === "SIGNALS" ? "Hiring" : "Funding"}
-          </p>
-        </article>
-      ))}
+    <span className="inline-flex items-center rounded-[2px] bg-[#c6f0e0] py-px pr-1 pl-0.5 text-[7px] leading-none text-[#23d592]">
+      <Image src="/figma/stage/trend.svg" alt="" width={8} height={8} className="-rotate-[41deg]" />
+      20%
+    </span>
+  )
+}
+
+function MetricCard({
+  title,
+  label,
+  note,
+  className,
+  surface,
+  children,
+}: {
+  title: string
+  label: string
+  note: string
+  className: string
+  surface: string
+  children: ReactNode
+}) {
+  return (
+    <article className={`absolute flex h-[336px] w-[270px] flex-col overflow-hidden rounded-[21px] border border-[#e5e5e5] shadow-[0_2px_4px_rgba(7,84,234,0.06)] ${surface} ${className}`}>
+      <div className="px-5 pt-5">
+        <p className="font-heading text-[18px] tracking-[0.18px] text-[#211d25]">{title}</p>
+        <div className="mt-3 flex items-center justify-between">
+          <p className="font-heading text-base text-[#787b80]">{label}</p>
+          <TrendBadge />
+        </div>
+        <p className="mt-1.5 font-heading text-sm leading-[18px] text-[#abb2bc]">{note}</p>
+      </div>
+      {children}
+    </article>
+  )
+}
+
+function PositionCards() {
+  return (
+    <div className="relative mx-auto aspect-[680/560] w-full max-w-[680px] [container-type:inline-size]">
+    <div className="absolute top-0 left-0 h-[560px] w-[680px] origin-top-left [zoom:calc(100cqw/680px)]">
+      <svg
+        aria-hidden
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        viewBox="0 0 680 560"
+        fill="none"
+      >
+        <path
+          d="M610 48C470 20 390 150 300 210"
+          stroke="#6aa7f8"
+          strokeWidth="1.6"
+        />
+        <path d="M150 470C280 500 470 430 620 470" stroke="#6aa7f8" strokeWidth="1.6" />
+        <path d="M300 210C250 250 180 340 150 470" stroke="#6aa7f8" strokeWidth="1.6" />
+      </svg>
+      <MetricCard
+        title="PROOF"
+        label="Case Proof"
+        note="Numerous meeting carried on the deck they trust"
+        surface="bg-white"
+        className="top-2 right-0 z-[1]"
+      >
+        <MonthBars heights={[52, 35, 95, 70, 132, 168, 132, 148, 120, 148, 157, 140]} />
+      </MetricCard>
+      <MetricCard
+        title="SIGNALS"
+        label="Lead Magnet"
+        note="Hiring and Funding say when it is time to reach out"
+        surface="bg-[linear-gradient(211deg,#8dc9fb_0%,#fff_54%,#fff_88%)]"
+        className="top-[108px] right-[92px] z-[2]"
+      >
+        <div className="relative mt-auto h-[168px]">
+          <svg viewBox="0 0 270 150" className="absolute inset-x-0 bottom-6 h-[130px] w-full" aria-hidden>
+            <path
+              d="M0 110 C 40 108, 70 90, 100 78 C 130 66, 150 40, 180 48 C 210 56, 230 30, 270 18 L 270 150 L 0 150 Z"
+              fill="url(#signalFill)"
+            />
+            <path
+              d="M0 110 C 40 108, 70 90, 100 78 C 130 66, 150 40, 180 48 C 210 56, 230 30, 270 18"
+              stroke="#7eb6f6"
+              strokeWidth="1.4"
+              fill="none"
+            />
+            <line x1="168" y1="20" x2="168" y2="140" stroke="#d7e6fb" />
+            <line x1="20" y1="78" x2="250" y2="78" stroke="#d7e6fb" />
+            <circle cx="168" cy="48" r="4" fill="#fff" stroke="#5b9af5" />
+            <defs>
+              <linearGradient id="signalFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#8dc9fb" stopOpacity="0.45" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <p className="absolute right-8 bottom-8 text-xs text-[#a4a4a4]">Hiring</p>
+          <p className="absolute bottom-8 left-6 text-xs text-[#a4a4a4]">Funding</p>
+        </div>
+      </MetricCard>
+      <MetricCard
+        title="TARGETS"
+        label="Lead Magnet"
+        note="Name the industries and Gulf roles the first line meets."
+        surface="bg-white"
+        className="top-[210px] left-2 z-[3]"
+      >
+        <MonthBars heights={[52, 35, 95, 140, 132, 188, 132, 168, 148, 110, 157, 150]} />
+      </MetricCard>
+    </div>
     </div>
   )
 }
 
 function BuildCard() {
   return (
-    <article className="ml-auto w-full max-w-[445px] rounded-[32px] border border-[#e5e5e5] bg-gradient-to-br from-[#89bdff] via-white to-white p-7 shadow-[0_3px_12px_rgba(7,84,234,0.08)]">
-      <p className="font-heading text-[28px] text-[#211d25]">BUILD</p>
-      <div className="mt-4 flex items-center justify-between">
+    <article
+      className="relative ml-auto w-full max-w-[445px] overflow-hidden rounded-[32px] border border-[#e5e5e5] p-8 shadow-[0_3px_12px_rgba(7,84,234,0.08)]"
+      style={{
+        backgroundImage:
+          "linear-gradient(211deg, rgb(137, 189, 255) 8%, rgba(255,255,255,0.2) 48%, #fff 78%)",
+      }}
+    >
+      <p className="font-heading text-[28px] tracking-[0.28px] text-[#211d25]">BUILD</p>
+      <div className="mt-6 flex items-center justify-between">
         <p className="font-heading text-2xl text-[#787b80]">Variant Card</p>
-        <span className="bg-[#0f5be5] px-2 py-1 text-[11px] text-white">+2 READY</span>
+        <Image src="/figma/stage/toggle-on.svg" alt="" width={62} height={35} />
       </div>
-      <p className="mt-4 text-lg text-[#211d25]">Heads of sales in the Gulf</p>
-      <p className="text-[15px] text-[#aab0b8]">
+      <p className="mt-5 font-heading text-lg tracking-[0.18px] text-[#211d25]">
+        Heads of sales in the Gulf
+      </p>
+      <p className="font-heading text-[15px] text-[#aab0b8]">
         This week they are hiring. The proof is 14 meetingd
       </p>
-      <div className="mt-4 space-y-3">
-        <div className="flex items-center justify-between rounded-[11px] border border-[#0754ea] bg-[#fafafa] px-4 py-3 shadow-[0_3px_6px_rgba(27,98,238,0.15)]">
-          <p>
-            English <span className="text-xs text-[#abb2bc]">(Ready)</span>
+      <div className="relative mt-5">
+        <span className="absolute -top-3 right-2 z-[1] bg-[#0f5be5] px-[7px] py-[3px] text-[11px] leading-none text-white">
+          +2 READY
+        </span>
+        <div className="flex h-14 items-center justify-between rounded-[11px] border-[1.4px] border-[#0754ea] bg-[#fafafa] px-4 shadow-[0_3px_6px_rgba(27,98,238,0.15)]">
+          <p className="font-heading text-sm text-[#0c1017]">
+            English <span className="text-[11px] text-[#abb2bc]">(Ready)</span>
           </p>
-          <span className="size-4 rounded-full border-4 border-[#0754ea]" />
-        </div>
-        <div className="flex items-center justify-between rounded-[11px] bg-[#fafafa] px-4 py-3 shadow-[0_3px_6px_rgba(133,145,167,0.15)]">
-          <p>
-            Arabic <span className="text-xs text-[#abb2bc]">(جاهز)</span>
-          </p>
-          <span className="size-4 rounded-full border border-[#d5d8de]" />
+          <Image src="/figma/stage/switch-on.svg" alt="" width={35} height={20} />
         </div>
       </div>
-      <button
-        type="button"
-        className="mt-8 w-full rounded-[9px] bg-gradient-to-r from-[#4796f8] to-[#4d85f1] py-3 text-lg text-white"
-      >
+      <div className="mt-3 flex h-14 items-center justify-between rounded-[11px] bg-[#fafafa] px-4 shadow-[0_3px_6px_rgba(133,145,167,0.15)]">
+        <p className="font-heading text-sm text-[#0c1017]">
+          Arabic <span className="text-[11px] text-[#abb2bc]">(جاهز)</span>
+        </p>
+        <Image src="/figma/stage/switch-off.svg" alt="" width={35} height={20} />
+      </div>
+      <div className="mt-8 w-full rounded-[9px] bg-gradient-to-r from-[#4796f8] to-[#4d85f1] py-3 text-center font-heading text-lg text-white shadow-[inset_0_4px_4px_rgba(255,255,255,0.16)]">
         Pick Broad variants
-      </button>
+      </div>
     </article>
   )
 }
@@ -289,6 +383,16 @@ function LaunchOrbit() {
       <div className="absolute inset-[8%] rounded-full border border-[#d7e4ff]" />
       <div className="absolute inset-[18%] rounded-full border border-[#c5d8ff]" />
       <div className="absolute inset-[30%] rounded-full border border-[#9ebfff] bg-[#f4f8ff]" />
+      <div
+        className="absolute top-1/2 left-1/2 size-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{
+          background:
+            "conic-gradient(from 310deg, transparent 0 200deg, rgba(142,182,248,0.72) 200deg 320deg, transparent 320deg)",
+        }}
+      />
+      <span className="absolute top-1/2 left-1/2 grid size-[88px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[28px] border border-[#d9d9d9] bg-white">
+        <Image src="/figma/stage/mark.svg" alt="" width={55} height={47} />
+      </span>
       {logos.map((logo) => (
         <span
           key={logo.label}
@@ -306,7 +410,10 @@ function CompoundCard() {
     <article className="relative ml-auto min-h-[420px] w-full max-w-[471px] overflow-hidden rounded-[34px] border border-[#e5e5e5] bg-gradient-to-br from-[#89bdff] via-white to-[#e7f0ff] p-8">
       <div className="flex items-start justify-between">
         <p className="font-heading text-[26px] text-[#787b80]">Winning Angle</p>
-        <span className="bg-[#c6f0e0] px-2 py-1 text-[11px] text-[#23d592]">Success</span>
+        <span className="inline-flex items-center gap-0.5 rounded-[3px] bg-[#c6f0e0] px-1.5 py-1 text-[11px] text-[#23d592]">
+          <Image src="/figma/stage/trend.svg" alt="" width={10} height={10} className="-rotate-[41deg]" />
+          Success
+        </span>
       </div>
       <p className="font-heading text-6xl text-[#5b86c4]">68%</p>
       <div className="mt-16 rounded-[24px] bg-gradient-to-b from-[#0754ea] to-[#2359c0] p-5 text-white">
