@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CampaignButton } from "@/components/site/campaign"
+import { LeadWorkspace } from "@/components/site/lead-workspace"
 
 const stages = [
   {
@@ -245,7 +246,7 @@ function BuildCard() {
 
 export function PipelineSection() {
   return (
-    <section id="pipeline" className="bg-white px-6 py-16 sm:px-10">
+    <section id="pipeline" className="overflow-x-clip bg-white px-6 py-16 sm:px-10">
       <div className="mx-auto w-full max-w-[1376px] 2xl:max-w-[1760px]">
         <p className="text-base font-semibold text-[#e57243]">COMPOUNDING GROWTH</p>
         <h2 className="mt-4 font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em]">
@@ -253,13 +254,11 @@ export function PipelineSection() {
           <br />
           <span className="text-[#c5c9d1]">compound pipeline</span>
         </h2>
-        <Image
-          src="/figma/stage/pipeline.png"
-          alt="Real lead workspace for Nooraya Logistics, with filters, imported leads, and ledger cost."
-          width={610}
-          height={404}
-          className="mt-10 h-auto w-full"
-        />
+        <div className="mt-10 [container-type:inline-size]">
+          <div className="ml-auto w-[980px] overflow-hidden rounded-[20px] border border-[#e6e8ee] shadow-[0_10px_30px_rgba(16,24,40,0.06)] [zoom:min(1,calc(100cqw/980px))]">
+            <LeadWorkspace />
+          </div>
+        </div>
       </div>
     </section>
   )
