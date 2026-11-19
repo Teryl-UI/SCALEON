@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, type ReactNode } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -183,146 +183,36 @@ export function OperatingSection() {
 
 function StageVisual({ id }: { id: (typeof stages)[number]["id"] }) {
   if (id === "build") return <BuildCard />
-  if (id === "launch") return <LaunchOrbit />
-  if (id === "compound") return <CompoundCard />
-  return <PositionCards />
-}
-
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-
-function MonthBars({ heights, lift = 0 }: { heights: number[]; lift?: number }) {
+  if (id === "launch") {
+    return (
+      <Image
+        src="/figma/stage/launch.png"
+        alt=""
+        width={607}
+        height={592}
+        className="mx-auto h-auto w-full max-w-[520px]"
+      />
+    )
+  }
+  if (id === "compound") {
+    return (
+      <Image
+        src="/figma/stage/compound.png"
+        alt=""
+        width={570}
+        height={642}
+        className="ml-auto h-auto w-full max-w-[471px]"
+      />
+    )
+  }
   return (
-    <div className="mt-auto px-3 pb-1">
-      <div className="flex h-[168px] items-end gap-[5px]">
-        {heights.map((height, index) => (
-          <span
-            key={months[index]}
-            className={`w-[14px] bg-gradient-to-b from-white via-[#c5e4fd] ${
-              index === 5 ? "to-[#3677ce]" : "to-[#85c5fa]"
-            }`}
-            style={{ height, marginBottom: index % 4 === 2 ? lift : 0 }}
-          />
-        ))}
-      </div>
-      <div className="mt-1 flex justify-between text-[7px] leading-[14px] text-[#c8c8c8]">
-        {months.map((month) => (
-          <span key={month}>{month}</span>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function TrendBadge() {
-  return (
-    <span className="inline-flex items-center rounded-[2px] bg-[#c6f0e0] py-px pr-1 pl-0.5 text-[7px] leading-none text-[#23d592]">
-      <Image src="/figma/stage/trend.svg" alt="" width={8} height={8} className="-rotate-[41deg]" />
-      20%
-    </span>
-  )
-}
-
-function MetricCard({
-  title,
-  label,
-  note,
-  className,
-  surface,
-  children,
-}: {
-  title: string
-  label: string
-  note: string
-  className: string
-  surface: string
-  children: ReactNode
-}) {
-  return (
-    <article className={`absolute flex h-[336px] w-[270px] flex-col overflow-hidden rounded-[21px] border border-[#e5e5e5] shadow-[0_2px_4px_rgba(7,84,234,0.06)] ${surface} ${className}`}>
-      <div className="px-5 pt-5">
-        <p className="font-heading text-[18px] tracking-[0.18px] text-[#211d25]">{title}</p>
-        <div className="mt-3 flex items-center justify-between">
-          <p className="font-heading text-base text-[#787b80]">{label}</p>
-          <TrendBadge />
-        </div>
-        <p className="mt-1.5 font-heading text-sm leading-[18px] text-[#abb2bc]">{note}</p>
-      </div>
-      {children}
-    </article>
-  )
-}
-
-function PositionCards() {
-  return (
-    <div className="relative mx-auto aspect-[680/560] w-full max-w-[680px] [container-type:inline-size]">
-    <div className="absolute top-0 left-0 h-[560px] w-[680px] origin-top-left [zoom:calc(100cqw/680px)]">
-      <svg
-        aria-hidden
-        className="pointer-events-none absolute inset-0 h-full w-full"
-        viewBox="0 0 680 560"
-        fill="none"
-      >
-        <path
-          d="M610 48C470 20 390 150 300 210"
-          stroke="#6aa7f8"
-          strokeWidth="1.6"
-        />
-        <path d="M150 470C280 500 470 430 620 470" stroke="#6aa7f8" strokeWidth="1.6" />
-        <path d="M300 210C250 250 180 340 150 470" stroke="#6aa7f8" strokeWidth="1.6" />
-      </svg>
-      <MetricCard
-        title="PROOF"
-        label="Case Proof"
-        note="Numerous meeting carried on the deck they trust"
-        surface="bg-white"
-        className="top-2 right-0 z-[1]"
-      >
-        <MonthBars heights={[52, 35, 95, 70, 132, 168, 132, 148, 120, 148, 157, 140]} />
-      </MetricCard>
-      <MetricCard
-        title="SIGNALS"
-        label="Lead Magnet"
-        note="Hiring and Funding say when it is time to reach out"
-        surface="bg-[linear-gradient(211deg,#8dc9fb_0%,#fff_54%,#fff_88%)]"
-        className="top-[108px] right-[92px] z-[2]"
-      >
-        <div className="relative mt-auto h-[168px]">
-          <svg viewBox="0 0 270 150" className="absolute inset-x-0 bottom-6 h-[130px] w-full" aria-hidden>
-            <path
-              d="M0 110 C 40 108, 70 90, 100 78 C 130 66, 150 40, 180 48 C 210 56, 230 30, 270 18 L 270 150 L 0 150 Z"
-              fill="url(#signalFill)"
-            />
-            <path
-              d="M0 110 C 40 108, 70 90, 100 78 C 130 66, 150 40, 180 48 C 210 56, 230 30, 270 18"
-              stroke="#7eb6f6"
-              strokeWidth="1.4"
-              fill="none"
-            />
-            <line x1="168" y1="20" x2="168" y2="140" stroke="#d7e6fb" />
-            <line x1="20" y1="78" x2="250" y2="78" stroke="#d7e6fb" />
-            <circle cx="168" cy="48" r="4" fill="#fff" stroke="#5b9af5" />
-            <defs>
-              <linearGradient id="signalFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#8dc9fb" stopOpacity="0.45" />
-                <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <p className="absolute right-8 bottom-8 text-xs text-[#a4a4a4]">Hiring</p>
-          <p className="absolute bottom-8 left-6 text-xs text-[#a4a4a4]">Funding</p>
-        </div>
-      </MetricCard>
-      <MetricCard
-        title="TARGETS"
-        label="Lead Magnet"
-        note="Name the industries and Gulf roles the first line meets."
-        surface="bg-white"
-        className="top-[210px] left-2 z-[3]"
-      >
-        <MonthBars heights={[52, 35, 95, 140, 132, 188, 132, 168, 148, 110, 157, 150]} />
-      </MetricCard>
-    </div>
-    </div>
+    <Image
+      src="/figma/stage/position.png"
+      alt=""
+      width={580}
+      height={490}
+      className="ml-auto h-auto w-full max-w-[640px]"
+    />
   )
 }
 
@@ -365,66 +255,6 @@ function BuildCard() {
       </div>
       <div className="mt-8 w-full rounded-[9px] bg-gradient-to-r from-[#4796f8] to-[#4d85f1] py-3 text-center font-heading text-lg text-white shadow-[inset_0_4px_4px_rgba(255,255,255,0.16)]">
         Pick Broad variants
-      </div>
-    </article>
-  )
-}
-
-function LaunchOrbit() {
-  const logos = [
-    { src: "/figma/linkedin.svg", label: "LinkedIn", className: "top-[8%] left-[28%]" },
-    { src: "/figma/whatsapp.svg", label: "WhatsApp", className: "top-[38%] left-[8%]" },
-    { src: "/figma/gmail.svg", label: "Gmail", className: "bottom-[12%] left-[22%]" },
-    { src: "/figma/facebook.svg", label: "Facebook", className: "bottom-[28%] left-[42%]" },
-    { src: "/figma/outlook.svg", label: "Outlook", className: "bottom-[8%] right-[8%]" },
-  ]
-  return (
-    <div className="relative mx-auto h-[420px] w-full max-w-[520px]">
-      <div className="absolute inset-[8%] rounded-full border border-[#d7e4ff]" />
-      <div className="absolute inset-[18%] rounded-full border border-[#c5d8ff]" />
-      <div className="absolute inset-[30%] rounded-full border border-[#9ebfff] bg-[#f4f8ff]" />
-      <div
-        className="absolute top-1/2 left-1/2 size-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{
-          background:
-            "conic-gradient(from 310deg, transparent 0 200deg, rgba(142,182,248,0.72) 200deg 320deg, transparent 320deg)",
-        }}
-      />
-      <span className="absolute top-1/2 left-1/2 grid size-[88px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[28px] border border-[#d9d9d9] bg-white">
-        <Image src="/figma/stage/mark.svg" alt="" width={55} height={47} />
-      </span>
-      {logos.map((logo) => (
-        <span
-          key={logo.label}
-          className={`absolute grid size-11 place-items-center rounded-[13px] border border-[#d9d9d9] bg-[#fcfcfc] p-2 ${logo.className}`}
-        >
-          <Image src={logo.src} alt={logo.label} width={22} height={22} />
-        </span>
-      ))}
-    </div>
-  )
-}
-
-function CompoundCard() {
-  return (
-    <article className="relative ml-auto min-h-[420px] w-full max-w-[471px] overflow-hidden rounded-[34px] border border-[#e5e5e5] bg-gradient-to-br from-[#89bdff] via-white to-[#e7f0ff] p-8">
-      <div className="flex items-start justify-between">
-        <p className="font-heading text-[26px] text-[#787b80]">Winning Angle</p>
-        <span className="inline-flex items-center gap-0.5 rounded-[3px] bg-[#c6f0e0] px-1.5 py-1 text-[11px] text-[#23d592]">
-          <Image src="/figma/stage/trend.svg" alt="" width={10} height={10} className="-rotate-[41deg]" />
-          Success
-        </span>
-      </div>
-      <p className="font-heading text-6xl text-[#5b86c4]">68%</p>
-      <div className="mt-16 rounded-[24px] bg-gradient-to-b from-[#0754ea] to-[#2359c0] p-5 text-white">
-        <div className="flex items-center justify-between text-[22px]">
-          <p>The next offer</p>
-          <span className="rounded-full bg-[#4f89fb] px-4 py-2 text-base">READY</span>
-        </div>
-        <p className="mt-4 text-[22px] text-[#eaeaea]">Rifler Constructions</p>
-        <div className="mt-5 h-[11px] rounded-full bg-[#ccc]">
-          <div className="h-full w-4/5 rounded-full bg-gradient-to-r from-[#0b49c2] to-[#042f84]" />
-        </div>
       </div>
     </article>
   )
