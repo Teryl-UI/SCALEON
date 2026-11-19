@@ -141,7 +141,7 @@ export function OperatingSection() {
           })}
         </div>
         <div className="grid items-center gap-8 px-4 py-10 lg:min-h-[616px] lg:grid-cols-[485px_minmax(0,1fr)] lg:px-6 lg:py-16">
-          <div className="flex flex-col gap-8 lg:gap-16">
+          <div key={stage.id} className="feature-rise flex flex-col gap-8 lg:gap-16">
             <p className="text-base leading-5 font-semibold text-[#e57243]">{stage.label}</p>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-2">
@@ -163,44 +163,46 @@ export function OperatingSection() {
 }
 
 function StageVisual({ id }: { id: (typeof stages)[number]["id"] }) {
-  if (id === "build") return <BuildCard />
-  if (id === "launch") {
-    return (
-      <Image
-        src="/figma/stage/launch.png"
-        alt=""
-        width={607}
-        height={592}
-        className="mx-auto h-auto w-full max-w-[520px]"
-      />
-    )
-  }
-  if (id === "compound") {
-    return (
-      <Image
-        src="/figma/stage/compound.png"
-        alt=""
-        width={570}
-        height={642}
-        className="ml-auto h-auto w-full max-w-[471px]"
-      />
-    )
-  }
   return (
-    <Image
-      src="/figma/stage/position.png"
-      alt=""
-      width={580}
-      height={490}
-      className="ml-auto h-auto w-full max-w-[640px]"
-    />
+    <div key={id} className="feature-rise">
+      <div className="feature-float">
+        {id === "build" ? <BuildCard /> : null}
+        {id === "launch" ? (
+          <Image
+            src="/figma/stage/launch.png"
+            alt=""
+            width={607}
+            height={592}
+            className="mx-auto h-auto w-full max-w-[520px]"
+          />
+        ) : null}
+        {id === "compound" ? (
+          <Image
+            src="/figma/stage/compound.png"
+            alt=""
+            width={570}
+            height={642}
+            className="ml-auto h-auto w-full max-w-[471px]"
+          />
+        ) : null}
+        {id === "position" ? (
+          <Image
+            src="/figma/stage/position.png"
+            alt=""
+            width={580}
+            height={490}
+            className="ml-auto h-auto w-full max-w-[640px]"
+          />
+        ) : null}
+      </div>
+    </div>
   )
 }
 
 function BuildCard() {
   return (
     <article
-      className="relative ml-auto w-full max-w-[445px] overflow-hidden rounded-[32px] border border-[#e5e5e5] p-8 shadow-[0_3px_12px_rgba(7,84,234,0.08)]"
+      className="relative ml-auto w-full max-w-[445px] overflow-hidden rounded-[32px] border border-[#e5e5e5] p-8 shadow-[0_12px_28px_rgba(7,84,234,0.12)] transition-shadow duration-500"
       style={{
         backgroundImage:
           "linear-gradient(211deg, rgb(137, 189, 255) 8%, rgba(255,255,255,0.2) 48%, #fff 78%)",

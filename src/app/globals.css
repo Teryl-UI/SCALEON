@@ -128,3 +128,39 @@
     @apply font-sans;
   }
 }
+
+@keyframes feature-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes feature-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.feature-rise {
+  animation: feature-rise 0.55s ease both;
+}
+
+.feature-float {
+  animation: feature-float 6s ease-in-out 0.55s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-rise,
+  .feature-float {
+    animation: none;
+  }
+}
