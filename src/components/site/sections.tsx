@@ -316,10 +316,10 @@ export function GrowthSection() {
             style={{ left: `${left}%` }}
           />
         ))}
-        <div className="absolute right-[6%] bottom-[18%] left-[12%] flex items-center justify-between">
+        <div className="absolute right-2 bottom-[16%] left-2 flex items-center justify-between gap-1 sm:right-[6%] sm:bottom-[18%] sm:left-[12%]">
           {["1910", "1510", "1000", "1000"].map((value, index) => (
-            <div key={`${value}-${index}`} className="flex items-center">
-              <span className="rounded-full bg-white px-3 py-1.5 text-[13px] text-black shadow-sm">
+            <div key={`${value}-${index}`} className="flex min-w-0 items-center">
+              <span className="rounded-full bg-white px-2 py-1 text-[11px] whitespace-nowrap text-black shadow-sm sm:px-3 sm:py-1.5 sm:text-[13px]">
                 {value}
               </span>
               {index < 3 ? (

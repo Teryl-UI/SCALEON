@@ -27,8 +27,16 @@ export function Header({
     <header className={className}>
       <div className="flex h-full items-center justify-between px-4">
         <div className="flex items-center gap-24">
-          <a href="#top" className="flex items-center gap-3.5">
-            <span className="size-6 shrink-0 bg-[#d9d9d9]" aria-hidden />
+          <a href="#top" className="flex items-center gap-[14px]">
+            <Image
+              src="/figma/logo-mark.svg"
+              alt=""
+              width={24.0326}
+              height={25.7505}
+              unoptimized
+              priority
+              className="shrink-0"
+            />
             <span className="font-heading text-[18px] leading-6 font-medium">Scaleon</span>
           </a>
           <nav className="hidden items-start gap-6 p-2.5 text-sm leading-5 lg:flex" aria-label="Primary">
