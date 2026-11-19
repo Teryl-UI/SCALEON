@@ -37,25 +37,6 @@ const stages = [
   },
 ] as const
 
-const leads = [
-  ["KA", "Khalid Al-Rumaihi", "Director, Project Finance", "Doha Meridian Capital", "BROAD", "Clay 17 cr · $0.17"],
-  ["HA", "Hessa Al-Mansoori", "Head of Infrastructure Finance", "Gulf Crescent Bank", "BROAD", "Clay 23 cr · $0.23"],
-  ["JW", "James Whitfield", "Head of Property & Technical Underwriting", "Thameside Re", "BROAD", "Clay 26 cr · $0.26"],
-  ["PR", "Priya Raman", "Senior Broker, Construction & Energy", "Harbourline Specialty", "BROAD", "Clay 20 cr · $0.20"],
-  ["TH", "Tariq Haddad", "VP Risk, Digital Infrastructure", "Sahara Edge Data Centres", "BROAD", "Clay 13 cr · $0.13"],
-  ["NA", "Noura Al-Suwaidi", "Chief Risk Officer", "Emirates Infra Partners", "HYPER", "Clay 43 cr · $0.43"],
-]
-
-const filters = [
-  ["Industry", ""],
-  ["Title", "20"],
-  ["Size", ""],
-  ["Tech", ""],
-  ["Signals", "18"],
-  ["Engagement", "17"],
-  ["Verification", "18"],
-]
-
 const reviews = [
   [
     "The positioning gave us a clearer way into the market—and a campaign the team could actually run.",
@@ -261,106 +242,22 @@ function BuildCard() {
 }
 
 export function PipelineSection() {
-  const [query, setQuery] = useState("")
-  const visible = leads.filter((row) =>
-    row.join(" ").toLowerCase().includes(query.trim().toLowerCase()),
-  )
-
   return (
     <section id="pipeline" className="bg-white px-6 py-16 sm:px-10">
       <div className="mx-auto w-full max-w-[1376px] 2xl:max-w-[1760px]">
         <p className="text-base font-semibold text-[#e57243]">COMPOUNDING GROWTH</p>
-        <h2 className="mt-4 max-w-[16ch] font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em]">
+        <h2 className="mt-4 font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em]">
           <span className="text-[#111]">From first angle to</span>
           <br />
           <span className="text-[#c5c9d1]">compound pipeline</span>
         </h2>
-        <div className="mt-10 overflow-hidden border border-[#e6eaf0] bg-white shadow-sm">
-          <div className="flex flex-wrap items-center gap-2 border-b border-[#e6eaf0] px-3 py-2 text-xs text-[#617080]">
-            <label className="min-w-40 flex-1">
-              <span className="sr-only">Search leads</span>
-              <Input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search (⌘K)"
-                className="h-8 rounded-none border-[#e6eaf0] text-xs"
-              />
-            </label>
-            <span className="rounded border border-[#e6eaf0] px-2 py-1">Nooraya Logistics</span>
-            <span className="rounded bg-[#fff1e8] px-2 py-1 text-[#e57243]">Setup 7 / 8</span>
-            <span className="ml-auto text-[#0b50e9]">Demo Fellow</span>
-          </div>
-          <div className="grid lg:grid-cols-[220px_1fr]">
-            <aside className="hidden border-r border-[#e6eaf0] p-4 text-sm lg:block">
-              <p className="text-xs tracking-wide text-[#8b93a0]">FILTERS</p>
-              <ul className="mt-3 space-y-2">
-                {filters.map(([label, count]) => (
-                  <li key={label} className="flex items-center justify-between text-[#334]">
-                    <span>{label}</span>
-                    <span className="text-[#e57243]">{count}</span>
-                  </li>
-                ))}
-              </ul>
-            </aside>
-            <div className="min-w-0">
-              <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
-                <div>
-                  <p className="text-sm font-medium">Real lead workspace</p>
-                  <p className="text-xs text-[#8b93a0]">
-                    Import Excel, CSV, TSV, ODS, or JSON. Name and Company are required.
-                  </p>
-                </div>
-                <div className="flex gap-2">
-                  <span className="border border-[#dfe3e8] px-3 py-2 text-xs">Generate leads</span>
-                  <span className="bg-[#0b50e9] px-3 py-2 text-xs text-white">Import leads</span>
-                </div>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-[760px] text-left text-xs">
-                  <thead className="text-[#8b93a0]">
-                    <tr className="border-y border-[#eef0f3]">
-                      {["Name", "Title", "Company", "Tier", "Ledger cost", "Action"].map((heading) => (
-                        <th key={heading} className="px-3 py-2 font-medium">
-                          {heading}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {visible.length === 0 ? (
-                      <tr>
-                        <td colSpan={6} className="px-3 py-8 text-sm text-[#666]">
-                          No leads match “{query}”. Clear the search to see the imported list.
-                        </td>
-                      </tr>
-                    ) : (
-                      visible.map((row) => (
-                        <tr key={row[1]} className="border-b border-[#f2f4f7]">
-                          <td className="px-3 py-3">
-                            <span className="mr-2 inline-grid size-6 place-items-center rounded-full bg-[#eef2f8] text-[10px]">
-                              {row[0]}
-                            </span>
-                            {row[1]}
-                          </td>
-                          <td className="px-3 py-3 text-[#445]">{row[2]}</td>
-                          <td className="px-3 py-3">{row[3]}</td>
-                          <td className="px-3 py-3">
-                            <span className="border border-[#dfe3e8] px-1.5 py-0.5">{row[4]}</span>
-                          </td>
-                          <td className="px-3 py-3 text-[#617080]">{row[5]}</td>
-                          <td className="px-3 py-3 text-[#0b50e9]">View</td>
-                        </tr>
-                      ))
-                    )}
-                  </tbody>
-                </table>
-              </div>
-              <p className="px-4 py-3 text-xs text-[#8b93a0]">
-                Showing 1 to {visible.length} of 20 Leads Found
-              </p>
-            </div>
-          </div>
-        </div>
+        <Image
+          src="/figma/stage/pipeline.png"
+          alt="Real lead workspace for Nooraya Logistics, with filters, imported leads, and ledger cost."
+          width={610}
+          height={404}
+          className="mt-10 h-auto w-full"
+        />
       </div>
     </section>
   )
