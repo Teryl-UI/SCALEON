@@ -7,7 +7,16 @@ import { CampaignButton } from "@/components/site/campaign"
 
 export function Hero() {
   return (
-    <section id="top" className="bg-[#014fce] text-white">
+    <section id="top" className="relative overflow-hidden bg-[#014fce] text-white">
+      <Image
+        src="/figma/dots.svg"
+        alt=""
+        width={838}
+        height={600}
+        unoptimized
+        priority
+        className="pointer-events-none absolute top-0 left-0 h-[600px] w-[838px] max-w-none lg:hidden"
+      />
       <div className="relative hidden w-full overflow-hidden [container-type:inline-size] lg:block">
         <div className="h-[951px] w-[1440px] [zoom:calc(100cqw/1440px)]">
             <DotField />
@@ -36,14 +45,14 @@ export function Hero() {
 
 function DotField() {
   return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute top-0 left-0 h-[600px] w-[838px]"
-      style={{
-        backgroundImage:
-          "radial-gradient(circle, rgba(255,255,255,0.72) 1.15px, transparent 1.3px)",
-        backgroundSize: "13.25px 11.25px",
-      }}
+    <Image
+      src="/figma/dots.svg"
+      alt=""
+      width={838}
+      height={600}
+      unoptimized
+      priority
+      className="pointer-events-none absolute top-0 left-0 h-[600px] w-[838px] max-w-none"
     />
   )
 }
