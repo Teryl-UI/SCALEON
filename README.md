@@ -11,6 +11,8 @@ npm run dev
 
 Open [http://localhost:3457](http://localhost:3457).
 
+The workspace overview is at [http://localhost:3457/overview](http://localhost:3457/overview). Live radar is `/overview/radar`. The same nav opens Prospects, Campaigns, Conversations, CRM, Reporting, and Setup.
+
 ## Use the page
 
 - **Start a Campaign** opens a request form. A valid work email confirms the request.
