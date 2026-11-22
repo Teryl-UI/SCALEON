@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { PositionCards } from "@/components/site/position-cards"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CampaignButton } from "@/components/site/campaign"
@@ -186,15 +187,7 @@ function StageVisual({ id }: { id: (typeof stages)[number]["id"] }) {
             className="ml-auto h-auto w-full max-w-[471px]"
           />
         ) : null}
-        {id === "position" ? (
-          <Image
-            src="/figma/stage/position.png"
-            alt=""
-            width={580}
-            height={490}
-            className="ml-auto h-auto w-full max-w-[640px]"
-          />
-        ) : null}
+        {id === "position" ? <PositionCards /> : null}
       </div>
     </div>
   )
