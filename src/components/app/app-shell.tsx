@@ -37,8 +37,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <Image
               src="/overview/logo.svg"
               alt=""
-              width={26.6283}
-              height={28.5315}
+              width={31.7598}
+              height={42.5149}
               unoptimized
               priority
             />

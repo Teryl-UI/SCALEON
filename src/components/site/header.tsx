@@ -27,17 +27,19 @@ export function Header({
     <header className={className}>
       <div className="flex h-full items-center justify-between px-4">
         <div className="flex items-center gap-24">
-          <a href="#top" className="flex items-center gap-[14px]">
+          <a href="#top" className="flex items-center gap-[6.31px]">
             <Image
               src="/figma/logo-mark.svg"
               alt=""
-              width={24.0326}
-              height={25.7505}
+              width={31.7598}
+              height={42.5149}
               unoptimized
               priority
               className="shrink-0"
             />
-            <span className="font-heading text-[18px] leading-6 font-medium">Scaleon</span>
+            <span className="font-heading text-[19.971px] leading-[22.675px] font-normal text-[#fdfdfd]">
+              Scaleon
+            </span>
           </a>
           <nav className="hidden items-start gap-6 p-2.5 text-sm leading-5 lg:flex" aria-label="Primary">
             <a href="#system">Systems</a>
