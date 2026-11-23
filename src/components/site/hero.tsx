@@ -22,7 +22,7 @@ export function Hero() {
             <DotField />
             <ProductPreview className="absolute top-[277px] left-[624px] z-[2] h-[720px] w-[1058px]" />
             <Mountain className="absolute top-[570px] left-0 z-[2] h-[381px] w-[1440px]" />
-            <HeroCopy className="absolute top-[130px] left-[24px] z-[3] w-[691px]" />
+            <HeroCopy className="absolute top-[144px] left-[24px] z-[3] w-[599px]" />
             <p className="absolute top-[841px] left-[26px] z-[3] text-sm leading-[30px] font-medium">
               Trusted By
             </p>
@@ -84,14 +84,16 @@ function Mountain({ className }: { className: string }) {
 function HeroCopy({ className }: { className: string }) {
   return (
     <div className={`flex flex-col items-start justify-center gap-6 px-4 py-2.5 ${className}`}>
-      <p className="text-sm leading-5 font-semibold">THE GULF’S OUTBOUND GROWTH SYSTEM</p>
-      <h1 className="w-full max-w-[659px] text-[clamp(40px,5vw,72px)] leading-[1.11] font-normal tracking-[-0.02em] lg:text-[72px] lg:leading-[80px] lg:tracking-[-1.44px]">
-        Build a position.Scale every relationship.
-      </h1>
-      <p className="max-w-[659px] text-base leading-6">
-        Scaleon connects positioning, research, outreach and follow-up into one
-        system that learns from the market.
-      </p>
+      <div className="flex w-full flex-col items-start gap-2">
+        <p className="text-sm leading-5 font-semibold">THE GULF’S OUTBOUND GROWTH SYSTEM</p>
+        <h1 className="w-full text-[clamp(40px,5vw,64px)] leading-[1.15] font-normal tracking-[-0.02em] lg:text-[64px] lg:leading-[80px] lg:tracking-[-1.28px]">
+          Build a position.Scale every relationship.
+        </h1>
+        <p className="w-full max-w-[570px] text-base leading-6 font-medium">
+          Scaleon connects positioning, research, outreach and follow-up into one
+          system that learns from the market.
+        </p>
+      </div>
       <div className="flex flex-wrap items-center gap-4">
         <CampaignButton withArrow={false} className="px-3 py-3.5 text-sm leading-5 font-medium" />
         <a href="#system" className="px-3 py-3.5 text-sm leading-5 font-medium">
