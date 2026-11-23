@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { CompoundCard } from "@/components/site/compound-card"
 import { PositionCards } from "@/components/site/position-cards"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -178,15 +179,7 @@ function StageVisual({ id }: { id: (typeof stages)[number]["id"] }) {
             className="mx-auto h-auto w-full max-w-[520px]"
           />
         ) : null}
-        {id === "compound" ? (
-          <Image
-            src="/figma/stage/compound.png"
-            alt=""
-            width={570}
-            height={642}
-            className="ml-auto h-auto w-full max-w-[471px]"
-          />
-        ) : null}
+        {id === "compound" ? <CompoundCard /> : null}
         {id === "position" ? <PositionCards /> : null}
       </div>
     </div>
