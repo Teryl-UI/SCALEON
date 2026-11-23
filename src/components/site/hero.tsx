@@ -20,8 +20,8 @@ export function Hero() {
       <div className="relative hidden w-full overflow-hidden [container-type:inline-size] lg:block">
         <div className="h-[951px] w-[1440px] [zoom:calc(100cqw/1440px)]">
             <DotField />
+            <ProductPreview className="absolute top-[277px] left-[624px] z-[2] h-[720px] w-[1058px]" />
             <Mountain className="absolute top-[570px] left-0 z-[2] h-[381px] w-[1440px]" />
-            <ProductPreview className="absolute top-[277px] left-[624px] z-[3] h-[720px] w-[1058px]" />
             <HeroCopy className="absolute top-[130px] left-[24px] z-[3] w-[691px]" />
             <p className="absolute top-[841px] left-[26px] z-[3] text-sm leading-[30px] font-medium">
               Trusted By
