@@ -255,7 +255,7 @@ export function GrowthSection() {
     <section id="growth" className="overflow-hidden bg-white px-6 py-16 sm:px-10">
       <div className="mx-auto grid w-full max-w-[1376px] items-end gap-8 2xl:max-w-[1760px] lg:grid-cols-2">
         <div>
-          <p className="text-base font-semibold text-[#e57243]">COMPOUNDING GROWTH</p>
+          <p className="text-base font-semibold text-[#e57243]">LONG-TERM CUSTOMERS</p>
           <h2 className="mt-4 font-heading text-[clamp(36px,3.61vw,76px)] leading-[1.23] font-medium tracking-[-0.02em] text-[#111]">
             From first touch to
             <br />

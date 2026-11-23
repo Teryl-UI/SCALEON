@@ -1,354 +1,241 @@
-import {
-  Activity,
-  Bell,
-  BookOpen,
-  Building2,
-  Check,
-  ChevronDown,
-  ChevronsLeft,
-  ClipboardCheck,
-  Columns3,
-  Globe,
-  Home,
-  Inbox,
-  LayoutGrid,
-  Link2,
-  List,
-  Mail,
-  Megaphone,
-  MoreHorizontal,
-  Phone,
-  Plus,
-  Radar,
-  ScrollText,
-  Search,
-  Settings,
-  Sparkles,
-  Upload,
-  Users,
-  Zap,
-} from "lucide-react"
+import Image from "next/image"
+
+const rail = [
+  { src: "/figma/dashboard/nav-home.svg", width: 15.7983, height: 15.5278, tile: "bg-[#1b62ee]" },
+  { src: "/figma/dashboard/nav-radar.svg", width: 15.7959, height: 15.8033, tile: "bg-[#1b62ee]" },
+  { src: "/figma/dashboard/nav-crm.svg", width: 15.7959, height: 14.3265, tile: "bg-[#1b62ee]" },
+  { src: "/figma/dashboard/nav-inputs.svg", width: 29.3878, height: 29.3878 },
+  { src: "/figma/dashboard/nav-integrations.svg", width: 29.3878, height: 29.3878 },
+  { src: "/figma/leads/nav-leads-active.svg", width: 29.3878, height: 29.3878 },
+  { src: "/figma/dashboard/nav-campaigns.svg", width: 29.3878, height: 29.3878 },
+  { src: "/figma/dashboard/nav-inbox.svg", width: 29.3878, height: 29.3878 },
+] as const
+
+const railLower = [
+  "/figma/dashboard/nav-templates.svg",
+  "/figma/dashboard/nav-ledger.svg",
+  "/figma/dashboard/nav-approvals.svg",
+  "/figma/dashboard/nav-health.svg",
+  "/figma/dashboard/nav-activity.svg",
+] as const
 
 const filters = [
-  { label: "Industry", icon: Building2 },
-  { label: "Title", icon: List, count: "20" },
-  { label: "Size", icon: LayoutGrid },
-  { label: "Tech", icon: Settings },
-  { label: "Signals", icon: Activity, count: "18" },
-  { label: "Engagement", icon: Megaphone, count: "17" },
-  { label: "Verification", icon: Check, count: "18" },
-]
+  { icon: "industry.svg", w: 14.6319, h: 14.6319, label: "Industry" },
+  { icon: "title.svg", w: 14.2946, h: 14.6333, label: "Title", count: "20" },
+  { icon: "size.svg", w: 14.6319, h: 14.6319, label: "Size" },
+  { icon: "tech.svg", w: 12.25, h: 12.25, label: "Tech" },
+  { icon: "signals.svg", w: 14.6296, h: 10.7626, label: "Signals", count: "18" },
+  { icon: "engagement.svg", w: 14.6319, h: 14.6319, label: "Engagement", count: "17" },
+  { icon: "verification.svg", w: 14.6353, h: 14.6319, label: "Verification", count: "18" },
+] as const
 
 const agentFilters = [
-  { label: "Has fresh signal", icon: Zap, count: "10" },
-  { label: "Awaiting approval", icon: ClipboardCheck, count: "5" },
-  { label: "Agent-touched", icon: Sparkles, count: "17" },
-]
+  { icon: "fresh.svg", w: 12.25, h: 14.635, label: "Has fresh signal", count: "10" },
+  { icon: "awaiting.svg", w: 14.6319, h: 14.6319, label: "Awaiting approval", count: "5" },
+  { icon: "agent.svg", w: 14.508, h: 14.6396, label: "Agent-touched", count: "17" },
+] as const
 
 const leads = [
-  {
-    initials: "KA",
-    name: "Khalid Al-Rumaihi",
-    title: "Director, Project Finance",
-    company: "Doha Meridian Capital",
-    tier: "BROAD",
-    email: true,
-    phone: true,
-    clay: ["Clay 17 cr ·", "$0.17"],
-    kimi: ["Kimi 12 cr ·", "1,218 tok"],
-  },
-  {
-    initials: "HA",
-    name: "Hessa Al-Mansoori",
-    title: "Head of Infrastructure Finance",
-    company: "Gulf Crescent Bank",
-    tier: "BROAD",
-    email: true,
-    phone: true,
-    clay: ["Clay 23 cr ·", "$0.23"],
-    kimi: ["Kimi 15 cr ·", "1,596 tok"],
-  },
-  {
-    initials: "JW",
-    name: "James Whitfield",
-    title: "Head of Property & Technical Underwriting",
-    company: "Thameside Re",
-    tier: "BROAD",
-    email: true,
-    phone: true,
-    clay: ["Clay 26 cr ·", "$0.26"],
-    kimi: ["Kimi 18 cr ·", "1,848 tok"],
-  },
-  {
-    initials: "PR",
-    name: "Priya Raman",
-    title: "Senior Broker, Construction & Energy",
-    company: "Harbourline Specialty",
-    tier: "BROAD",
-    email: true,
-    phone: true,
-    clay: ["Clay 20 cr ·", "$0.20"],
-    kimi: ["Kimi 13 cr ·", "1,386 tok"],
-  },
-  {
-    initials: "TH",
-    name: "Tariq Haddad",
-    title: "VP Risk, Digital Infrastructure",
-    company: "Sahara Edge Data Centres",
-    tier: "BROAD",
-    email: false,
-    phone: true,
-    clay: ["Clay 13 cr ·", "$0.13"],
-    kimi: ["Kimi 8 cr ·", "882 tok"],
-  },
-  {
-    initials: "NA",
-    name: "Noura Al-Suwaidi",
-    title: "Chief Risk Officer",
-    company: "Emirates Infra Partners",
-    tier: "HYPER",
-    email: true,
-    phone: true,
-    clay: ["Clay 43 cr ·", "$0.43"],
-    kimi: ["Kimi 28 cr ·", "2,982 tok"],
-  },
-  {
-    initials: "OG",
-    name: "Oliver Grant",
-    title: "Managing Director, Infrastructure Debt",
-    company: "Aldgate Infrastructure Capital",
-    tier: "HYPER",
-    email: true,
-    phone: true,
-    clay: ["Clay 40 cr ·", "$0.40"],
-    kimi: ["Kimi 26 cr ·", "2,772 tok"],
-  },
-]
-
-const nav = [
-  Home,
-  Radar,
-  Activity,
-  LayoutGrid,
-  Link2,
-  Users,
-  Megaphone,
-  Inbox,
-]
-
-const lowerNav = [LayoutGrid, BookOpen, ClipboardCheck, Activity, ScrollText]
+  ["KA", "Khalid Al-Rumaihi", "Director, Project Finance", "Doha Meridian Capital", "BROAD", "Clay 17 cr · $0.17", "Kimi 12 cr · 1,218 tok"],
+  ["HA", "Hessa Al-Mansoori", "Head of Infrastructure Finance", "Gulf Crescent Bank", "BROAD", "Clay 23 cr · $0.23", "Kimi 15 cr · 1,596 tok"],
+  ["JW", "James Whitfield", "Head of Property & Technical Underwriting", "Thameside Re", "BROAD", "Clay 26 cr · $0.26", "Kimi 18 cr · 1,848 tok"],
+  ["PR", "Priya Raman", "Senior Broker, Construction & Energy", "Harbourline Specialty", "BROAD", "Clay 20 cr · $0.20", "Kimi 13 cr · 1,386 tok"],
+  ["TH", "Tariq Haddad", "VP Risk, Digital Infrastructure", "Sahara Edge Data Centres", "BROAD", "Clay 13 cr · $0.13", "Kimi 8 cr · 882 tok"],
+  ["NA", "Noura Al-Suwaidi", "Chief Risk Officer", "Emirates Infra Partners", "HYPER", "Clay 43 cr · $0.43", "Kimi 28 cr · 2,982 tok"],
+  ["OG", "Oliver Grant", "Managing Director, Infrastructure Debt", "Aldgate Infrastructure Capital", "HYPER", "Clay 40 cr · $0.40", "Kimi 26 cr · 2,772 tok"],
+] as const
 
 export function LeadWorkspace() {
   return (
-    <div className="flex h-[645px] w-[980px] overflow-hidden bg-[#f3f5f8] text-[#1c2430]">
-      <aside className="flex w-[52px] shrink-0 flex-col items-center bg-[#1a56f0] py-2 text-white">
-        <span className="grid size-7 place-items-center">
-          <span className="flex gap-[3px]">
-            <span className="h-3.5 w-[3px] rounded-sm bg-white" />
-            <span className="mt-1 h-2.5 w-[3px] rounded-sm bg-white" />
-            <span className="h-3.5 w-[3px] rounded-sm bg-white" />
-          </span>
+    <div className="flex h-[645px] w-[980px] overflow-hidden rounded-[8px] bg-[#f4f5f6] font-sans text-[#0c1017]">
+      <aside className="flex w-[52px] shrink-0 flex-col items-center overflow-hidden bg-[#0754ea] py-[8px]">
+        <span className="grid size-[27.2px] place-items-center rounded-[3.4px] bg-[#003fc4]">
+          <Glyph src="/figma/dashboard/mark.svg" width={16.1633} height={12.926} />
         </span>
-        <span className="my-2 h-px w-7 bg-white/30" />
-        <div className="flex flex-1 flex-col items-center gap-1">
-          {nav.map((Icon, index) => (
-            <span
-              key={index}
-              className={`grid size-7 place-items-center rounded-md ${
-                index === 5 ? "bg-white text-[#1a56f0]" : "text-white"
-              }`}
-            >
-              <Icon className="size-3.5" strokeWidth={1.75} />
-            </span>
-          ))}
-          <span className="my-1 h-px w-5 bg-white/30" />
-          {lowerNav.map((Icon, index) => (
-            <span key={`lower-${index}`} className="grid size-7 place-items-center text-white">
-              <Icon className="size-3.5" strokeWidth={1.75} />
-            </span>
+        <span className="my-[5px] h-px w-[35px] bg-white/25" />
+        <div className="flex min-h-0 w-full flex-1 flex-col items-center gap-[3px] overflow-hidden">
+          {rail.map((item) =>
+            "tile" in item ? (
+              <span
+                key={item.src}
+                className={`grid size-[27.2px] place-items-center rounded-[3.4px] ${item.tile}`}
+              >
+                <Glyph src={item.src} width={item.width} height={item.height} />
+              </span>
+            ) : (
+              <Glyph key={item.src} src={item.src} width={item.width} height={item.height} />
+            ),
+          )}
+          <span className="my-[3px] h-px w-[22px] bg-white/25" />
+          {railLower.map((src) => (
+            <Glyph key={src} src={src} width={29.3878} height={29.3878} />
           ))}
         </div>
-        <span className="grid size-7 place-items-center text-white">
-          <Settings className="size-3.5" strokeWidth={1.75} />
-        </span>
-        <span className="grid size-7 place-items-center text-white">
-          <ChevronsLeft className="size-3.5" strokeWidth={1.75} />
-        </span>
+        <Glyph src="/figma/dashboard/nav-settings.svg" width={29.3878} height={29.3878} />
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-11 items-center gap-3 px-3">
-          <label className="flex h-7 w-[250px] items-center gap-2 rounded-md border border-[#e6e8ee] bg-white px-2 text-[11px] text-[#98a0ab]">
-            <Search className="size-3.5" />
-            Search (⌘K)
-          </label>
-          <div className="ml-auto flex items-center gap-2">
-            <button
-              type="button"
-              className="flex h-[22px] items-center gap-1 rounded-md px-1.5 text-[11px] text-[#3c4654]"
-            >
-              <Building2 className="size-3" />
+        <header className="flex h-[44px] shrink-0 items-center gap-[8px] border-b border-[#dce2eb] bg-white px-[11px]">
+          <div className="flex h-[27px] w-[240px] items-center gap-[6px] rounded-[4px] border border-[#dce2eb] bg-[#f7f9fc] px-[8px]">
+            <Glyph src="/figma/dashboard/search.svg" width={15.7941} height={15.7967} />
+            <span className="text-[10px] whitespace-pre text-[#667386]">{`Search  (⌘K)`}</span>
+          </div>
+          <div className="ml-auto flex items-center gap-[8px]">
+            <span className="flex items-center gap-[5px] rounded-[4px] border border-[#dce2eb] px-[7px] py-[3px] text-[9.5px] font-medium">
+              <Glyph src="/figma/dashboard/building.svg" width={13.2245} height={13.2245} />
               Nooraya Logistics
-              <ChevronDown className="size-3 text-[#98a0ab]" />
-            </button>
-            <button
-              type="button"
-              className="flex h-6 items-center gap-1.5 rounded-md bg-[#fff1e6] px-1.5 text-[11px] font-medium text-[#e57243]"
-            >
-              <span className="grid size-3.5 place-items-center rounded-full bg-[#ffd7bf] text-[9px]">
-                ○
-              </span>
-              Setup 7 / 8
-              <span className="h-1 w-7 overflow-hidden rounded-full bg-[#ffd7bf]">
-                <span className="block h-full w-5/6 bg-[#e57243]" />
-              </span>
-            </button>
-            <span className="flex h-6 items-center gap-1 rounded-md border border-[#e6e8ee] bg-white px-1 text-[10px]">
-              <Globe className="size-3 text-[#667085]" />
-              <span className="rounded bg-[#1a56f0] px-1.5 py-0.5 font-medium text-white">EN</span>
-              <span className="px-1 text-[#667085]">AR</span>
-              <span className="rounded bg-[#1a56f0] px-1.5 py-0.5 font-medium text-white">123</span>
-              <span className="px-1 text-[#667085]">١٢٣</span>
+              <Glyph src="/figma/dashboard/chevron.svg" width={11.7551} height={11.7551} />
             </span>
-            <span className="relative grid size-6 place-items-center rounded-full text-[#667085]">
-              <Bell className="size-3.5" />
-              <span className="absolute top-1 right-1 size-1.5 rounded-full bg-[#f97316]" />
+            <span className="flex items-center gap-[5px] rounded-[4px] bg-[#fff0e5] py-[2px] pr-[8px] pl-[5px]">
+              <span className="grid size-[16px] place-items-center rounded-full bg-[#ffe0c9]">
+                <Glyph src="/figma/dashboard/setup.svg" width={9.55102} height={9.55102} />
+              </span>
+              <span className="text-[9px] font-semibold text-[#b54708]">Setup 7 / 8</span>
+              <span className="h-[4px] w-[27px] overflow-hidden rounded-full bg-[#ffd6b9]">
+                <span className="block h-full w-[24px] rounded-full bg-[#ff650b]" />
+              </span>
             </span>
-            <button type="button" className="flex items-center gap-1.5 text-[11px] text-[#3c4654]">
-              <span className="grid size-5 place-items-center rounded-full bg-[#dbe7ff] text-[9px] font-semibold text-[#1a56f0]">
+            <span className="flex items-center gap-[5px]">
+              <Glyph src="/figma/dashboard/globe.svg" width={15.7959} height={15.7959} />
+              <span className="flex rounded-[4px] border border-[#dce2eb] bg-white p-[1px] text-[8.5px] font-semibold">
+                <span className="rounded-full bg-[#0754ea] px-[7px] py-[4px] text-white">EN</span>
+                <span className="px-[7px] py-[4px] text-[#667386]">AR</span>
+              </span>
+              <span className="flex rounded-[4px] border border-[#dce2eb] bg-white p-[1px] text-[8.5px] font-semibold">
+                <span className="rounded-full bg-[#0754ea] px-[7px] py-[4px] text-white">123</span>
+                <span className="px-[7px] py-[4px] text-[#667386]">١٢٣</span>
+              </span>
+            </span>
+            <Glyph src="/figma/dashboard/bell.svg" width={26.449} height={26.449} />
+            <span className="flex items-center gap-[5px] rounded-[4px] border border-[#dce2eb] py-[2px] pr-[7px] pl-[3px] text-[9.5px] font-medium">
+              <span className="grid size-[19px] place-items-center rounded-full bg-[#e8f0ff] text-[8px] text-[#0754ea]">
                 DF
               </span>
               Demo Fellow
-              <ChevronDown className="size-3 text-[#98a0ab]" />
-            </button>
+              <Glyph src="/figma/dashboard/chevron-account.svg" width={12.7361} height={6.31653} />
+            </span>
           </div>
         </header>
 
-        <div className="flex min-h-0 flex-1 gap-3 px-4 pb-3">
-          <aside className="w-[168px] shrink-0 pt-8">
-            <p className="px-1 text-[11px] font-semibold tracking-[0.08em] text-[#98a2b3]">FILTERS</p>
-            <ul className="mt-2 space-y-0.5">
+        <div className="min-h-0 flex-1 overflow-hidden px-[16px] pt-[16px]">
+          <p className="text-[16px] leading-[22px] font-bold tracking-[0.49px] text-[#f4f4f2] uppercase">
+            Lead List
+          </p>
+          <div className="mt-[16px] flex gap-[14px]">
+            <aside className="w-[150px] shrink-0">
+              <p className="px-[3px] pb-[8px] text-[10px] leading-[15px] font-bold tracking-[0.3px] uppercase">
+                Filters
+              </p>
               {filters.map((item) => (
-                <li key={item.label}>
-                  <FilterRow {...item} />
-                </li>
+                <FilterRow key={item.label} {...item} />
               ))}
-            </ul>
-            <p className="mt-3 px-1 text-[10px] font-semibold tracking-[0.08em] text-[#98a2b3]">AGENT</p>
-            <ul className="mt-1 space-y-0.5">
+              <p className="px-[3px] pt-[11px] pb-[5px] text-[7.5px] leading-[11px] font-medium tracking-[0.19px] text-[#4f4d51] uppercase">
+                Agent
+              </p>
               {agentFilters.map((item) => (
-                <li key={item.label}>
-                  <FilterRow {...item} />
-                </li>
+                <FilterRow key={item.label} {...item} />
               ))}
-            </ul>
-          </aside>
+            </aside>
 
-          <div className="min-w-0 flex-1 rounded-xl border border-[#e7e9ee] bg-white">
-            <div className="flex items-start justify-between gap-3 border-b border-[#f0f2f5] px-3 py-2.5">
-              <div>
-                <p className="text-[13px] font-semibold text-[#1c2430]">Real lead workspace</p>
-                <p className="max-w-[420px] text-[10px] leading-4 text-[#98a2b3]">
-                  Import Excel, CSV, TSV, ODS, or JSON. Name and Company are required; every other
-                  field can be enriched later.
-                </p>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center justify-between rounded-[3px] border border-[rgba(244,244,242,0.16)] bg-white px-[11px] py-[8px]">
+                <div>
+                  <p className="text-[11px] leading-[14px] font-medium">Real lead workspace</p>
+                  <p className="text-[8px] leading-[12px] text-[#667386]">
+                    Import Excel, CSV, TSV, ODS, or JSON. Name and Company are required; every other
+                    field can be enriched later.
+                  </p>
+                </div>
+                <div className="flex shrink-0 gap-[5px]">
+                  <span className="flex h-[22px] items-center gap-[5px] rounded-[3px] border border-[rgba(12,16,23,0.28)] px-[8px] text-[8px] font-medium tracking-[0.49px] uppercase">
+                    <Glyph src="/figma/leads/generate.svg" width={14.508} height={14.6396} />
+                    Generate leads
+                  </span>
+                  <span className="flex h-[22px] items-center gap-[5px] rounded-[3px] bg-[#0754ea] px-[8px] text-[8px] font-medium tracking-[0.49px] text-white uppercase">
+                    <Glyph src="/figma/leads/import.svg" width={14.6319} height={14.6323} />
+                    Import leads
+                  </span>
+                </div>
               </div>
-              <div className="flex shrink-0 gap-1.5">
-                <button
-                  type="button"
-                  className="flex h-[22px] items-center gap-1 rounded-md border border-[#e6e8ee] bg-white px-2 text-[10px] font-semibold tracking-wide text-[#3c4654]"
-                >
-                  <Sparkles className="size-3" />
-                  GENERATE LEADS
-                </button>
-                <button
-                  type="button"
-                  className="flex h-[22px] items-center gap-1 rounded-md bg-[#1a56f0] px-2 text-[10px] font-semibold tracking-wide text-white"
-                >
-                  <Upload className="size-3" />
-                  IMPORT LEADS
-                </button>
+              <div className="mt-[11px] flex justify-end">
+                <span className="flex h-[22px] items-center gap-[5px] rounded-[3px] border border-[rgba(12,16,23,0.28)] px-[8px] text-[8px] font-medium tracking-[0.49px] uppercase">
+                  <Glyph src="/figma/leads/columns.svg" width={14.6319} height={13.2708} />
+                  Columns
+                </span>
+              </div>
+              <div className="mt-[11px] overflow-hidden bg-white">
+                <table className="w-full border-collapse text-left">
+                  <thead>
+                    <tr className="text-[8px] text-[#667386]">
+                      <th className="w-[25px] border-b border-[rgba(12,16,23,0.16)] px-[3px] py-[8px] font-medium">
+                        <span className="block size-[14px] rounded-[1px] border border-[rgba(12,16,23,0.24)] bg-white" />
+                      </th>
+                      {["Name", "Title", "Company", "Tier", "Data Points"].map((label) => (
+                        <th
+                          key={label}
+                          className="border-b border-[rgba(12,16,23,0.16)] px-[8px] py-[8px] font-medium"
+                        >
+                          {label}
+                        </th>
+                      ))}
+                      <th className="border-b border-[rgba(12,16,23,0.16)] px-[8px] py-[8px] text-right font-medium">
+                        Ledger cost
+                      </th>
+                      <th className="border-b border-[rgba(12,16,23,0.16)] px-[8px] py-[8px] text-right font-medium">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {leads.map((lead) => (
+                      <tr key={lead[1]} className="align-middle">
+                        <td className="border-b border-[rgba(12,16,23,0.16)] px-[3px] py-[11px]">
+                          <span className="block size-[14px] rounded-[1px] border border-[rgba(12,16,23,0.24)] bg-white" />
+                        </td>
+                        <td className="border-b border-[rgba(12,16,23,0.16)] px-[8px] py-[11px]">
+                          <span className="flex items-center gap-[8px]">
+                            <span className="grid size-[19px] shrink-0 place-items-center rounded-full bg-[#dfdfdf] text-[7.5px] font-medium">
+                              {lead[0]}
+                            </span>
+                            <span className="text-[9.5px] leading-[14px] font-medium">{lead[1]}</span>
+                          </span>
+                        </td>
+                        <td className="max-w-[143px] border-b border-[rgba(12,16,23,0.16)] px-[8px] py-[11px] text-[9.5px] leading-[14px] text-[#667386]">
+                          {lead[2]}
+                        </td>
+                        <td className="max-w-[121px] border-b border-[rgba(12,16,23,0.16)] px-[8px] py-[11px] text-[9.5px] leading-[14px] text-[#667386]">
+                          {lead[3]}
+                        </td>
+                        <td className="border-b border-[rgba(12,16,23,0.16)] px-[8px] py-[11px]">
+                          <span className="border border-[rgba(12,16,23,0.28)] px-[5px] py-[2px] text-[7.5px] leading-[8px] font-medium tracking-[0.6px]">
+                            {lead[4]}
+                          </span>
+                        </td>
+                        <td className="border-b border-[rgba(12,16,23,0.16)] px-[8px] py-[11px]">
+                          <span className="flex gap-[5px]">
+                            <Glyph src="/figma/leads/email.svg" width={21.7778} height={21.7778} />
+                            <Glyph src="/figma/leads/phone.svg" width={21.7778} height={21.7778} />
+                          </span>
+                        </td>
+                        <td className="border-b border-[rgba(12,16,23,0.16)] px-[8px] py-[11px] text-right text-[8px] leading-[11px] text-[#667386]">
+                          <span className="flex items-center justify-end gap-[3px]">
+                            <Glyph src="/figma/leads/cost.svg" width={6.03993} height={8.16667} />
+                            {lead[5]}
+                          </span>
+                          <span className="block">{lead[6]}</span>
+                        </td>
+                        <td className="border-b border-[rgba(12,16,23,0.16)] px-[8px] py-[11px]">
+                          <span className="flex items-center justify-end gap-[3px]">
+                            <span className="text-[8px] leading-[12px] text-[#e4856c] underline">View</span>
+                            <Glyph src="/figma/leads/more.svg" width={13.2708} height={3.74306} />
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
-            <div className="flex justify-end px-3 py-1.5">
-              <button
-                type="button"
-                className="flex h-[22px] items-center gap-1 rounded-md border border-[#e6e8ee] px-2 text-[10px] font-semibold tracking-wide text-[#3c4654]"
-              >
-                <Columns3 className="size-3" />
-                COLUMNS
-              </button>
-            </div>
-            <table className="w-full border-collapse text-left">
-              <thead>
-                <tr className="text-[10px] text-[#98a2b3]">
-                  <th className="w-8 px-2 font-medium" />
-                  <th className="px-2 py-1.5 font-medium">Name</th>
-                  <th className="px-2 font-medium">Title</th>
-                  <th className="px-2 font-medium">Company</th>
-                  <th className="px-2 font-medium">Tier</th>
-                  <th className="px-2 font-medium">Data Points</th>
-                  <th className="px-2 text-right font-medium">Ledger cost</th>
-                  <th className="px-2 text-right font-medium">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leads.map((lead) => (
-                  <tr key={lead.name} className="border-t border-[#f2f4f7] align-middle">
-                    <td className="px-2 py-3">
-                      <span className="block size-3 rounded-[3px] border border-[#d0d5dd]" />
-                    </td>
-                    <td className="px-2 py-3">
-                      <span className="flex items-center gap-2">
-                        <span className="grid size-5 shrink-0 place-items-center rounded-full bg-[#eef1f4] text-[8px] font-semibold text-[#667085]">
-                          {lead.initials}
-                        </span>
-                        <span className="text-[11px] font-medium whitespace-nowrap text-[#1c2430]">
-                          {lead.name}
-                        </span>
-                      </span>
-                    </td>
-                    <td className="max-w-[150px] px-2 py-3 text-[11px] leading-4 text-[#475467]">
-                      {lead.title}
-                    </td>
-                    <td className="max-w-[120px] px-2 py-3 text-[11px] leading-4 text-[#475467]">
-                      {lead.company}
-                    </td>
-                    <td className="px-2 py-3">
-                      <span className="rounded border border-[#e4e7ec] px-1.5 py-0.5 text-[8px] font-semibold tracking-wide text-[#475467]">
-                        {lead.tier}
-                      </span>
-                    </td>
-                    <td className="px-2 py-3">
-                      <span className="flex gap-1 text-[#98a2b3]">
-                        {lead.email ? (
-                          <span className="grid size-5 place-items-center rounded border border-[#e4e7ec]">
-                            <Mail className="size-3" />
-                          </span>
-                        ) : null}
-                        {lead.phone ? (
-                          <span className="grid size-5 place-items-center rounded border border-[#e4e7ec]">
-                            <Phone className="size-3" />
-                          </span>
-                        ) : null}
-                      </span>
-                    </td>
-                    <td className="px-2 py-3 text-right text-[10px] leading-3 text-[#98a2b3]">
-                      <span className="block">{lead.clay[0]}</span>
-                      <span className="block">{lead.clay[1]}</span>
-                      <span className="mt-1 block">{lead.kimi[0]}</span>
-                      <span className="block">{lead.kimi[1]}</span>
-                    </td>
-                    <td className="px-2 py-3 text-right">
-                      <span className="inline-flex items-center gap-2 text-[11px] font-medium text-[#e23b3b]">
-                        View
-                        <MoreHorizontal className="size-3.5 text-[#98a2b3]" />
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
@@ -357,26 +244,32 @@ export function LeadWorkspace() {
 }
 
 function FilterRow({
+  icon,
+  w,
+  h,
   label,
-  icon: Icon,
   count,
 }: {
+  icon: string
+  w: number
+  h: number
   label: string
-  icon: typeof Building2
   count?: string
 }) {
   return (
-    <div className="flex h-7 items-center gap-1.5 px-1 text-[11px] text-[#475467]">
-      <Icon className="size-3.5 shrink-0 text-[#98a2b3]" strokeWidth={1.75} />
-      <span className="whitespace-nowrap">{label}</span>
+    <div className="flex items-center gap-[8px] px-[3px] py-[7px] text-[9.5px] leading-[14px] text-[#667386]">
+      <Glyph src={`/figma/leads/${icon}`} width={w} height={h} />
+      <span className="min-w-0 flex-1 truncate">{label}</span>
       {count ? (
-        <span className="ml-auto rounded-full bg-[#eef1f4] px-1.5 text-[10px] text-[#667085]">
+        <span className="rounded-full bg-[rgba(145,179,154,0.12)] px-[5px] py-[1px] text-[8px] font-medium text-[#cc5536]">
           {count}
         </span>
-      ) : (
-        <span className="ml-auto" />
-      )}
-      <Plus className="size-3 text-[#c5ccd6]" />
+      ) : null}
+      <Glyph src="/figma/leads/plus.svg" width={9.1875} height={9.1875} />
     </div>
   )
+}
+
+function Glyph({ src, width, height }: { src: string; width: number; height: number }) {
+  return <Image src={src} alt="" width={width} height={height} unoptimized />
 }
