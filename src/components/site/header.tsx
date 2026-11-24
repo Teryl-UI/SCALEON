@@ -37,7 +37,7 @@ export function Header({
               priority
               className="shrink-0"
             />
-            <span className="font-heading text-[19.971px] leading-[22.675px] font-normal text-[#fdfdfd]">
+            <span className="font-logo text-[19.971px] leading-[22.675px] font-normal text-[#fdfdfd]">
               Scaleon
             </span>
           </a>

@@ -42,8 +42,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               unoptimized
               priority
             />
-            <span className="font-heading text-[15px] leading-none font-semibold tracking-[0.04em]">
-              SCALEON
+            <span className="font-logo text-[19.971px] leading-[22.675px] font-normal text-[#0c1017]">
+              Scaleon
             </span>
           </Link>
 
