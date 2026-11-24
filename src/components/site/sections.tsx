@@ -190,7 +190,7 @@ function BuildCard() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const timer = window.setInterval(() => setArabic((on) => !on), 3400)
+    const timer = window.setInterval(() => setArabic((on) => !on), 7000)
     return () => window.clearInterval(timer)
   }, [])
 
