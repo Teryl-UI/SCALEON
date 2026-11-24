@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { Noto_Sans_Arabic } from "next/font/google"
 import Image from "next/image"
 import { CompoundCard } from "@/components/site/compound-card"
 import { LaunchCard } from "@/components/site/launch-card"
@@ -9,6 +10,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CampaignButton } from "@/components/site/campaign"
 import { LeadWorkspace } from "@/components/site/lead-workspace"
+
+const notoArabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+})
 
 const stages = [
   {
@@ -180,46 +186,130 @@ function StageVisual({ id }: { id: (typeof stages)[number]["id"] }) {
 }
 
 function BuildCard() {
+  const [arabic, setArabic] = useState(false)
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const timer = window.setInterval(() => setArabic((on) => !on), 3400)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const copy = arabic
+    ? {
+        stage: "بناء",
+        card: "بطاقة النسخة",
+        title: "رؤساء المبيعات في الخليج",
+        body: "هذا الأسبوع يوظّفون. الدليل ١٤ اجتماعاً",
+        badge: "+٢ جاهز",
+        english: "الإنجليزية",
+        englishState: "جاهز",
+        arabic: "العربية",
+        arabicState: "جاهز",
+        button: "اختر نسخ برود",
+      }
+    : {
+        stage: "BUILD",
+        card: "Variant Card",
+        title: "Heads of sales in the Gulf",
+        body: "This week they are hiring. The proof is 14 meetingd",
+        badge: "+2 READY",
+        english: "English",
+        englishState: "Ready",
+        arabic: "Arabic",
+        arabicState: "جاهز",
+        button: "Pick Broad variants",
+      }
+  const face = arabic ? notoArabic.className : "font-heading"
+
   return (
     <article
+      dir={arabic ? "rtl" : "ltr"}
       className="relative ml-auto w-full max-w-[445px] overflow-hidden rounded-[32px] border border-[#e5e5e5] p-8 shadow-[0_12px_28px_rgba(7,84,234,0.12)] transition-shadow duration-500"
       style={{
         backgroundImage:
           "linear-gradient(211deg, rgb(137, 189, 255) 8%, rgba(255,255,255,0.2) 48%, #fff 78%)",
       }}
     >
-      <p className="font-heading text-[28px] tracking-[0.28px] text-[#211d25]">BUILD</p>
-      <div className="mt-6 flex items-center justify-between">
-        <p className="font-heading text-2xl text-[#787b80]">Variant Card</p>
-        <Image src="/figma/stage/toggle-on.svg" alt="" width={62} height={35} />
-      </div>
-      <p className="mt-5 font-heading text-lg tracking-[0.18px] text-[#211d25]">
-        Heads of sales in the Gulf
-      </p>
-      <p className="font-heading text-[15px] text-[#aab0b8]">
-        This week they are hiring. The proof is 14 meetingd
-      </p>
-      <div className="relative mt-5">
-        <span className="absolute -top-3 right-2 z-[1] bg-[#0f5be5] px-[7px] py-[3px] text-[11px] leading-none text-white">
-          +2 READY
-        </span>
-        <div className="flex h-14 items-center justify-between rounded-[11px] border-[1.4px] border-[#0754ea] bg-[#fafafa] px-4 shadow-[0_3px_6px_rgba(27,98,238,0.15)]">
-          <p className="font-heading text-sm text-[#0c1017]">
-            English <span className="text-[11px] text-[#abb2bc]">(Ready)</span>
-          </p>
-          <Image src="/figma/stage/switch-on.svg" alt="" width={35} height={20} />
+      <div key={copy.stage} className="build-swap">
+        <p className={`${face} text-[28px] tracking-[0.28px] text-[#211d25]`}>{copy.stage}</p>
+        <div className="mt-6 flex items-center justify-between">
+          <p className={`${face} text-2xl text-[#787b80]`}>{copy.card}</p>
+          <Image src="/figma/stage/toggle-on.svg" alt="" width={62} height={35} />
         </div>
+        <p className={`${face} mt-5 text-lg tracking-[0.18px] text-[#211d25]`}>{copy.title}</p>
+        <p className={`${face} text-[15px] text-[#aab0b8]`}>{copy.body}</p>
       </div>
-      <div className="mt-3 flex h-14 items-center justify-between rounded-[11px] bg-[#fafafa] px-4 shadow-[0_3px_6px_rgba(133,145,167,0.15)]">
-        <p className="font-heading text-sm text-[#0c1017]">
-          Arabic <span className="text-[11px] text-[#abb2bc]">(جاهز)</span>
-        </p>
-        <Image src="/figma/stage/switch-off.svg" alt="" width={35} height={20} />
-      </div>
-      <div className="mt-8 w-full rounded-[9px] bg-gradient-to-r from-[#4796f8] to-[#4d85f1] py-3 text-center font-heading text-lg text-white shadow-[inset_0_4px_4px_rgba(255,255,255,0.16)]">
-        Pick Broad variants
+      <VariantRow
+        active={!arabic}
+        label={copy.english}
+        state={copy.englishState}
+        badge={copy.badge}
+        face={face}
+        className="mt-5"
+      />
+      <VariantRow
+        active={arabic}
+        label={copy.arabic}
+        state={copy.arabicState}
+        badge={copy.badge}
+        face={face}
+        className="mt-3"
+      />
+      <div className="mt-8 w-full rounded-[9px] bg-gradient-to-r from-[#4796f8] to-[#4d85f1] py-3 text-center text-lg text-white shadow-[inset_0_4px_4px_rgba(255,255,255,0.16)]">
+        <span key={copy.button} className={`build-swap ${face}`}>
+          {copy.button}
+        </span>
       </div>
     </article>
+  )
+}
+
+function VariantRow({
+  active,
+  label,
+  state,
+  badge,
+  face,
+  className,
+}: {
+  active: boolean
+  label: string
+  state: string
+  badge: string
+  face: string
+  className: string
+}) {
+  return (
+    <div
+      className={`relative transition-transform duration-500 ease-out ${className} ${
+        active ? "z-[1] scale-[1.045]" : "scale-100"
+      }`}
+    >
+      {active ? (
+        <span className="absolute -top-3 z-[1]" style={{ insetInlineEnd: 8 }}>
+          <span dir="ltr" className="block bg-[#0f5be5] px-[7px] py-[3px] text-[11px] leading-none text-white">
+            {badge}
+          </span>
+        </span>
+      ) : null}
+      <div
+        className={`flex h-14 items-center justify-between rounded-[11px] border-[1.4px] bg-[#fafafa] px-4 transition-all duration-500 ${
+          active
+            ? "border-[#0754ea] shadow-[0_3px_6px_rgba(27,98,238,0.15)]"
+            : "border-transparent shadow-[0_3px_6px_rgba(133,145,167,0.15)]"
+        }`}
+      >
+        <p className={`${face} text-sm text-[#0c1017]`}>
+          {label} <span className="text-[11px] text-[#abb2bc]">({state})</span>
+        </p>
+        <Image
+          src={active ? "/figma/stage/switch-on.svg" : "/figma/stage/switch-off.svg"}
+          alt=""
+          width={35}
+          height={20}
+        />
+      </div>
+    </div>
   )
 }
 

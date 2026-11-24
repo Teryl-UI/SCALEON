@@ -187,6 +187,21 @@
   animation: launch-hit 8s linear infinite;
 }
 
+@keyframes build-swap {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.build-swap {
+  animation: build-swap 0.45s ease;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .feature-rise,
   .feature-float,
@@ -197,5 +212,9 @@
   .launch-scan {
     animation: none;
     transform: rotate(80deg);
+  }
+
+  .build-swap {
+    animation: none;
   }
 }
