@@ -44,7 +44,7 @@ export function CompoundCard() {
                 <span className="text-[11.137px] leading-[14.319px] text-[#23d592]">Success</span>
               </span>
             </div>
-            <p className="font-heading text-[65.19px] leading-[71.709px] font-medium text-[#5b86c4]">
+            <p className="font-heading text-[65.19px] leading-[71.709px] font-medium text-[#0754ea]">
               68%
             </p>
           </div>
@@ -149,12 +149,12 @@ function OfferCard({ ghost = false }: { ghost?: boolean }) {
       <p className="font-heading text-[26.598px] leading-[26.598px] font-medium text-[#eaeaea]">
         Rifler Constructions
       </p>
-      <div className="h-[11.082px] w-full rounded-[44.329px] bg-[#ccc]">
+      <div className="h-[11.082px] w-full overflow-hidden rounded-[44.329px] bg-[#ccc]">
         <div
-          className={`h-[11.082px] w-[281.492px] rounded-[8.866px] ${
+          className={`h-[11.082px] rounded-[8.866px] ${
             ghost
-              ? "bg-gradient-to-r from-[rgba(11,73,194,0.42)] to-[rgba(4,47,132,0.42)]"
-              : "bg-gradient-to-r from-[#0b49c2] to-[#042f84]"
+              ? "w-[68%] bg-gradient-to-r from-[rgba(11,73,194,0.42)] to-[rgba(4,47,132,0.42)]"
+              : "compound-fill bg-gradient-to-r from-[#0b49c2] to-[#042f84]"
           }`}
         />
       </div>

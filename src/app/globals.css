@@ -295,6 +295,28 @@
   }
 }
 
+.compound-fill {
+  width: 68%;
+  animation: compound-fill 3.8s ease-in-out infinite;
+}
+
+@keyframes compound-fill {
+  0%,
+  14% {
+    width: 68%;
+  }
+  68%,
+  84% {
+    width: 100%;
+  }
+  84.2% {
+    width: 68%;
+  }
+  100% {
+    width: 68%;
+  }
+}
+
 @keyframes position-comet-upper {
   0%,
   52% {
@@ -331,7 +353,8 @@
   .position-flow-lower,
   .position-flow-upper,
   .position-comet-lower,
-  .position-comet-upper {
+  .position-comet-upper,
+  .compound-fill {
     animation: none;
   }
 
