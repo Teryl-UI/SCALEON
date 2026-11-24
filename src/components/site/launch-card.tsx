@@ -1,3 +1,4 @@
+import { useId } from "react"
 import Image from "next/image"
 
 const WIDTH = 607
@@ -17,6 +18,8 @@ const channels = [
 const rings = [78, 128, 178, 232]
 
 export function LaunchCard() {
+  const gradientId = `launch-sweep-${useId().replace(/:/g, "")}`
+
   return (
     <div className="relative mx-auto w-full max-w-[520px] [container-type:inline-size]">
       <div className="h-[calc(592px*min(1,100cqw/607px))]">
@@ -36,30 +39,33 @@ export function LaunchCard() {
               }}
             />
           ))}
-          <span
+          <svg
             aria-hidden
-            className="launch-scan pointer-events-none absolute rounded-full blur-[10px]"
-            style={{
-              width: 500,
-              height: 500,
-              left: CENTER_X - 250,
-              top: CENTER_Y - 250,
-              background:
-                "conic-gradient(from 0deg, transparent 0deg, transparent 286deg, rgba(186,214,255,0.05) 314deg, rgba(168,206,255,0.45) 346deg, rgba(196,220,255,0.72) 360deg)",
-            }}
-          />
-          <span
-            aria-hidden
-            className="launch-scan pointer-events-none absolute rounded-full"
-            style={{
-              width: 464,
-              height: 464,
-              left: CENTER_X - 232,
-              top: CENTER_Y - 232,
-              background:
-                "conic-gradient(from 0deg, transparent 0deg, transparent 292deg, rgba(190,218,255,0.08) 318deg, rgba(170,208,255,0.42) 348deg, rgba(214,232,255,0.78) 360deg)",
-            }}
-          />
+            className="launch-sweep pointer-events-none absolute"
+            viewBox="0 0 247.5 461.841"
+            width={232}
+            height={432.93}
+            style={{ left: CENTER_X, top: CENTER_Y - 232 }}
+          >
+            <path
+              d="M123.75 461.841C170.934 434.6 207.81 392.55 228.66 342.214C249.51 291.878 253.168 236.069 239.067 183.442C224.965 130.816 193.893 84.3123 150.668 51.1451C107.444 17.9778 54.4832 0 0 0L0 247.5L123.75 461.841Z"
+              fill={`url(#${gradientId})`}
+            />
+            <defs>
+              <linearGradient
+                id={gradientId}
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="495"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset="0" stopColor="white" />
+                <stop offset="0.5" stopColor="#C5E4FD" />
+                <stop offset="1" stopColor="#85C5FA" />
+              </linearGradient>
+            </defs>
+          </svg>
           {channels.map((channel) => (
             <span
               key={channel.src}

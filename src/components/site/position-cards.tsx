@@ -17,9 +17,9 @@ const bars = [
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-export function PositionCards() {
+export function PositionCards({ className = "" }: { className?: string }) {
   return (
-    <div className="relative ml-auto w-full max-w-[700px] [container-type:inline-size]">
+    <div className={`relative ml-auto w-full max-w-[700px] [container-type:inline-size] ${className}`}>
       <div className="h-[calc(590px*min(1,100cqw/700px))]">
         <div className="relative h-[590px] w-[700px] [zoom:min(1,calc(100cqw/700px))]">
           <ChartCard

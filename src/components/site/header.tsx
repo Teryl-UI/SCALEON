@@ -76,13 +76,18 @@ export function Header({
             <a href="#contact">Contact</a>
           </nav>
         </div>
-        <Button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="hidden h-full rounded-none bg-[#e8472a] px-3 text-sm leading-5 font-normal text-white hover:bg-[#d13d22] lg:inline-flex"
-        >
-          Start a Campaign
-        </Button>
+        <div className="hidden h-full items-center gap-6 lg:flex">
+          <a href="/sign-in" className="text-sm leading-5">
+            Sign in
+          </a>
+          <Button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="h-full rounded-none bg-[#e8472a] px-3 text-sm leading-5 font-normal text-white hover:bg-[#d13d22]"
+          >
+            Start a Campaign
+          </Button>
+        </div>
         {showMenu ? (
           <Button
             type="button"
@@ -116,6 +121,9 @@ export function Header({
           </a>
           <a className="block py-2" href="#contact" onClick={() => setMenuOpen(false)}>
             Contact
+          </a>
+          <a className="block py-2" href="/sign-in" onClick={() => setMenuOpen(false)}>
+            Sign in
           </a>
           <Button
             type="button"

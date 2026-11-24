@@ -3,9 +3,9 @@ import Image from "next/image"
 const CARD_WIDTH = 471
 const CARD_HEIGHT = 547.6
 
-export function CompoundCard() {
+export function CompoundCard({ className = "" }: { className?: string }) {
   return (
-    <div className="relative ml-auto w-full max-w-[471px] [container-type:inline-size]">
+    <div className={`relative ml-auto w-full max-w-[471px] [container-type:inline-size] ${className}`}>
       <div className="h-[calc(547.6px*min(1,100cqw/471px))]">
         <article
           className="relative overflow-hidden rounded-[34.225px] border-[1.63px] border-[#e5e5e5] [zoom:min(1,calc(100cqw/471px))]"

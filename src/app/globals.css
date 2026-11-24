@@ -184,6 +184,11 @@
   transform-origin: center;
 }
 
+.launch-sweep {
+  animation: launch-scan 8s linear infinite;
+  transform-origin: 0 53.59%;
+}
+
 .launch-hit {
   animation: launch-hit 8s linear infinite;
 }
@@ -276,6 +281,11 @@
   .launch-scan {
     animation: none;
     transform: rotate(80deg);
+  }
+
+  .launch-sweep {
+    animation: none;
+    transform: none;
   }
 
   .build-swap,
