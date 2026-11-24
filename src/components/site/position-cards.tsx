@@ -36,30 +36,101 @@ export function PositionCards() {
             body="Name the industries and Gulf roles the first line meets."
           />
           <div className="pointer-events-none absolute top-[0.15px] left-[95.16px] flex h-[332.837px] w-[313.842px] items-center justify-center">
-            <div className="-scale-y-100 rotate-[-50.39deg]">
-              <Image
-                src="/figma/stage/position/arc-upper.svg"
-                alt=""
+            <div className="relative -scale-y-100 rotate-[-50.39deg]">
+              <ArrowArc
                 width={301.306}
                 height={158.695}
-                unoptimized
+                shape="M0.196946 139.942L0 140.402C57.2699 164.944 110.552 164.446 160.306 140.986C210.038 117.538 256.196 71.1734 299.297 4.07976L298.877 3.80951L298.456 3.53927C255.406 70.5525 209.375 116.745 159.88 140.082C110.408 163.408 57.4259 163.923 0.393892 139.482L0.196946 139.942ZM301.306 0L296.184 2.6631L301.051 5.76787L301.306 0Z"
+                route="M0.197 139.942C57.348 164.434 110.48 163.927 160.093 140.534C209.707 117.142 255.801 70.863 298.877 3.81L301.2 1.2"
+                gradientId="position-upper-fade"
+                gradient={{ x1: 273.111, y1: 85.2895, x2: -61.6453, y2: 85.2895 }}
+                flow="upper"
               />
             </div>
           </div>
           <div className="pointer-events-none absolute top-[406.47px] left-[289.18px] flex h-[152.178px] w-[327.938px] items-center justify-center">
-            <div className="rotate-[159.05deg]">
-              <Image
-                src="/figma/stage/position/arc-lower.svg"
-                alt=""
+            <div className="relative rotate-[159.05deg]">
+              <ArrowArc
                 width={338.625}
                 height={34.9974}
-                unoptimized
+                shape="M0.251217 33.8854L0.502434 34.3177C59.5648 -0.00386661 135.382 -2.90708 200.286 4.06214C265.174 11.0297 319.065 27.8547 334.209 32.9022L334.367 32.4278L334.525 31.9535C319.347 26.8948 265.381 10.0461 200.393 3.06786C135.42 -3.90878 59.3405 -1.0301 0 33.4531L0.251217 33.8854ZM338.625 33.8854L334.83 29.535L332.96 34.9974L338.625 33.8854Z"
+                route="M0.251 33.885C59.453 -0.517 135.401 -3.408 200.34 3.565C265.278 10.538 319.206 27.375 334.367 32.428L338.4 33.7"
+                gradientId="position-lower-fade"
+                gradient={{ x1: 338.625, y1: 17.1927, x2: 0.251217, y2: 17.1927 }}
+                flow="lower"
               />
             </div>
           </div>
         </div>
       </div>
     </div>
+  )
+}
+
+function ArrowArc({
+  width,
+  height,
+  shape,
+  route,
+  gradientId,
+  gradient,
+  flow,
+}: {
+  width: number
+  height: number
+  shape: string
+  route: string
+  gradientId: string
+  gradient: { x1: number; y1: number; x2: number; y2: number }
+  flow: "upper" | "lower"
+}) {
+  return (
+    <>
+      <svg
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        fill="none"
+        overflow="visible"
+        aria-hidden
+      >
+        <path d={shape} fill={`url(#${gradientId})`} />
+        <path
+          d={route}
+          fill="none"
+          stroke="rgba(7,84,234,0.28)"
+          strokeWidth={8}
+          strokeLinecap="round"
+          pathLength={100}
+          strokeDasharray="18 120"
+          className={`position-flow position-flow-${flow}`}
+        />
+        <path
+          d={route}
+          fill="none"
+          stroke="#0754EA"
+          strokeWidth={2.6}
+          strokeLinecap="round"
+          pathLength={100}
+          strokeDasharray="18 120"
+          className={`position-flow position-flow-${flow}`}
+        />
+        <defs>
+          <linearGradient
+            id={gradientId}
+            x1={gradient.x1}
+            y1={gradient.y1}
+            x2={gradient.x2}
+            y2={gradient.y2}
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#0754EA" />
+            <stop offset="1" stopColor="white" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <span className={`position-comet position-comet-${flow}`} style={{ offsetPath: `path("${route}")` }} />
+    </>
   )
 }
 
