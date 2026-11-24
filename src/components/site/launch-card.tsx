@@ -81,14 +81,14 @@ export function LaunchCard() {
             </span>
           ))}
           <span
-            className="absolute grid size-[86px] place-items-center rounded-[22px] bg-white shadow-[0_12px_28px_rgba(7,84,234,0.16)]"
+            className="absolute grid size-[108px] place-items-center rounded-[26px] bg-white shadow-[0_12px_28px_rgba(7,84,234,0.16)]"
             style={{ left: 451, top: 286, translate: "-50% -50%" }}
           >
             <Image
               src="/figma/logo-mark.svg"
               alt=""
-              width={31.7598}
-              height={42.5149}
+              width={58.3}
+              height={78}
               unoptimized
             />
           </span>
