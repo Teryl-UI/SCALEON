@@ -158,9 +158,44 @@
   animation: feature-float 6s ease-in-out 0.55s infinite;
 }
 
+@keyframes launch-scan {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes launch-hit {
+  0% {
+    box-shadow:
+      0 8px 18px rgba(16, 24, 40, 0.08),
+      0 0 0 7px rgba(7, 84, 234, 0.16);
+  }
+  14%,
+  100% {
+    box-shadow:
+      0 8px 18px rgba(16, 24, 40, 0.08),
+      0 0 0 0 rgba(7, 84, 234, 0);
+  }
+}
+
+.launch-scan {
+  animation: launch-scan 8s linear infinite;
+  transform-origin: center;
+}
+
+.launch-hit {
+  animation: launch-hit 8s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .feature-rise,
-  .feature-float {
+  .feature-float,
+  .launch-hit {
     animation: none;
+  }
+
+  .launch-scan {
+    animation: none;
+    transform: rotate(80deg);
   }
 }

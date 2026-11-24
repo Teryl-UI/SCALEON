@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { CompoundCard } from "@/components/site/compound-card"
+import { LaunchCard } from "@/components/site/launch-card"
 import { PositionCards } from "@/components/site/position-cards"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -170,15 +171,7 @@ function StageVisual({ id }: { id: (typeof stages)[number]["id"] }) {
     <div key={id} className="feature-rise">
       <div className="feature-float">
         {id === "build" ? <BuildCard /> : null}
-        {id === "launch" ? (
-          <Image
-            src="/figma/stage/launch.png"
-            alt=""
-            width={607}
-            height={592}
-            className="mx-auto h-auto w-full max-w-[520px]"
-          />
-        ) : null}
+        {id === "launch" ? <LaunchCard /> : null}
         {id === "compound" ? <CompoundCard /> : null}
         {id === "position" ? <PositionCards /> : null}
       </div>
