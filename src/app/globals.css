@@ -202,96 +202,44 @@
   animation: build-swap 0.45s ease;
 }
 
-/* Packet rides each position arrow, then the other, then repeats. */
-.position-flow-lower {
-  animation: position-dash-lower 6.8s linear infinite;
+/* The drawn arrows reveal themselves along their own curves, one then the other. */
+.position-arrow {
+  stroke-dashoffset: 100;
 }
 
-.position-flow-upper {
-  animation: position-dash-upper 6.8s linear infinite;
+.position-arrow-upper {
+  animation: position-arrow-upper 6.4s linear infinite;
 }
 
-.position-comet {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: #fff;
-  box-shadow:
-    0 0 0 2px #0754ea,
-    0 0 12px 4px rgba(7, 84, 234, 0.45);
-  offset-anchor: center;
-  offset-rotate: 0deg;
-  pointer-events: none;
+.position-arrow-lower {
+  animation: position-arrow-lower 6.4s linear infinite;
 }
 
-.position-comet-lower {
-  animation: position-comet-lower 6.8s linear infinite;
-}
-
-.position-comet-upper {
-  animation: position-comet-upper 6.8s linear infinite;
-}
-
-@keyframes position-dash-lower {
+@keyframes position-arrow-upper {
   0%,
   6% {
-    stroke-dashoffset: 20;
-    opacity: 0;
+    stroke-dashoffset: 100;
   }
-  12% {
-    opacity: 1;
-  }
-  44% {
-    stroke-dashoffset: -82;
-    opacity: 1;
-  }
-  50%,
-  100% {
-    stroke-dashoffset: -82;
-    opacity: 0;
-  }
-}
-
-@keyframes position-dash-upper {
-  0%,
-  52% {
-    stroke-dashoffset: 20;
-    opacity: 0;
-  }
-  58% {
-    opacity: 1;
-  }
+  44%,
   90% {
-    stroke-dashoffset: -82;
-    opacity: 1;
+    stroke-dashoffset: 0;
   }
-  96%,
   100% {
-    stroke-dashoffset: -82;
-    opacity: 0;
+    stroke-dashoffset: 100;
   }
 }
 
-@keyframes position-comet-lower {
+@keyframes position-arrow-lower {
   0%,
-  6% {
-    offset-distance: 0%;
-    opacity: 0;
+  48% {
+    stroke-dashoffset: 100;
   }
-  12% {
-    opacity: 1;
+  86%,
+  94% {
+    stroke-dashoffset: 0;
   }
-  44% {
-    offset-distance: 100%;
-    opacity: 1;
-  }
-  50%,
   100% {
-    offset-distance: 100%;
-    opacity: 0;
+    stroke-dashoffset: 100;
   }
 }
 
@@ -317,26 +265,6 @@
   }
 }
 
-@keyframes position-comet-upper {
-  0%,
-  52% {
-    offset-distance: 0%;
-    opacity: 0;
-  }
-  58% {
-    opacity: 1;
-  }
-  90% {
-    offset-distance: 100%;
-    opacity: 1;
-  }
-  96%,
-  100% {
-    offset-distance: 100%;
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .feature-rise,
   .feature-float,
@@ -350,18 +278,13 @@
   }
 
   .build-swap,
-  .position-flow-lower,
-  .position-flow-upper,
-  .position-comet-lower,
-  .position-comet-upper,
+  .position-arrow-upper,
+  .position-arrow-lower,
   .compound-fill {
     animation: none;
   }
 
-  .position-flow-lower,
-  .position-flow-upper,
-  .position-comet-lower,
-  .position-comet-upper {
-    opacity: 0;
+  .position-arrow {
+    stroke-dashoffset: 0;
   }
 }

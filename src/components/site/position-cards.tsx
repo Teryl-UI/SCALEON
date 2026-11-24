@@ -36,7 +36,7 @@ export function PositionCards() {
             body="Name the industries and Gulf roles the first line meets."
           />
           <div className="pointer-events-none absolute top-[0.15px] left-[95.16px] flex h-[332.837px] w-[313.842px] items-center justify-center">
-            <div className="relative -scale-y-100 rotate-[-50.39deg]">
+            <div className="-scale-y-100 rotate-[-50.39deg]">
               <ArrowArc
                 width={301.306}
                 height={158.695}
@@ -49,7 +49,7 @@ export function PositionCards() {
             </div>
           </div>
           <div className="pointer-events-none absolute top-[406.47px] left-[289.18px] flex h-[152.178px] w-[327.938px] items-center justify-center">
-            <div className="relative rotate-[159.05deg]">
+            <div className="rotate-[159.05deg]">
               <ArrowArc
                 width={338.625}
                 height={34.9974}
@@ -84,53 +84,51 @@ function ArrowArc({
   gradient: { x1: number; y1: number; x2: number; y2: number }
   flow: "upper" | "lower"
 }) {
+  const maskId = `${gradientId}-mask`
+
   return (
-    <>
-      <svg
-        width={width}
-        height={height}
-        viewBox={`0 0 ${width} ${height}`}
-        fill="none"
-        overflow="visible"
-        aria-hidden
-      >
-        <path d={shape} fill={`url(#${gradientId})`} />
-        <path
-          d={route}
-          fill="none"
-          stroke="rgba(7,84,234,0.28)"
-          strokeWidth={8}
-          strokeLinecap="round"
-          pathLength={100}
-          strokeDasharray="18 120"
-          className={`position-flow position-flow-${flow}`}
-        />
-        <path
-          d={route}
-          fill="none"
-          stroke="#0754EA"
-          strokeWidth={2.6}
-          strokeLinecap="round"
-          pathLength={100}
-          strokeDasharray="18 120"
-          className={`position-flow position-flow-${flow}`}
-        />
-        <defs>
-          <linearGradient
-            id={gradientId}
-            x1={gradient.x1}
-            y1={gradient.y1}
-            x2={gradient.x2}
-            y2={gradient.y2}
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#0754EA" />
-            <stop offset="1" stopColor="white" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <span className={`position-comet position-comet-${flow}`} style={{ offsetPath: `path("${route}")` }} />
-    </>
+    <svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      fill="none"
+      overflow="visible"
+      aria-hidden
+    >
+      <defs>
+        <linearGradient
+          id={gradientId}
+          x1={gradient.x1}
+          y1={gradient.y1}
+          x2={gradient.x2}
+          y2={gradient.y2}
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#0754EA" />
+          <stop offset="1" stopColor="white" />
+        </linearGradient>
+        <mask
+          id={maskId}
+          maskUnits="userSpaceOnUse"
+          x={-40}
+          y={-40}
+          width={width + 80}
+          height={height + 80}
+        >
+          <path
+            d={route}
+            fill="none"
+            stroke="white"
+            strokeWidth={22}
+            strokeLinecap="round"
+            pathLength={100}
+            strokeDasharray="100 100"
+            className={`position-arrow position-arrow-${flow}`}
+          />
+        </mask>
+      </defs>
+      <path d={shape} fill={`url(#${gradientId})`} mask={`url(#${maskId})`} />
+    </svg>
   )
 }
 
