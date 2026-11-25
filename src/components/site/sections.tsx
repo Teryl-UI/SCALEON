@@ -10,7 +10,6 @@ import { PositionCards } from "@/components/site/position-cards"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CampaignButton } from "@/components/site/campaign"
-import { hasSignedIn } from "@/lib/account"
 import { LeadWorkspace } from "@/components/site/lead-workspace"
 
 const notoArabic = Noto_Sans_Arabic({
@@ -445,19 +444,10 @@ export function ReviewsSection() {
 export function SignupSection() {
   const router = useRouter()
   const [email, setEmail] = useState("")
-  const [status, setStatus] = useState<"idle" | "error" | "sent">("idle")
 
   function submit(event: React.FormEvent) {
     event.preventDefault()
-    if (!hasSignedIn()) {
-      router.push("/sign-in")
-      return
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setStatus("error")
-      return
-    }
-    setStatus("sent")
+    router.push("/sign-in")
   }
 
   return (
@@ -490,13 +480,9 @@ export function SignupSection() {
             id="signup-email"
             type="email"
             value={email}
-            onChange={(event) => {
-              setEmail(event.target.value)
-              setStatus("idle")
-            }}
+            onChange={(event) => setEmail(event.target.value)}
             placeholder="What’s your email?"
             className="h-[51px] w-full rounded-none border-0 bg-white px-3 text-sm text-[#617080] sm:w-[324px]"
-            aria-invalid={status === "error" ? true : undefined}
           />
           <Button
             type="submit"
@@ -510,16 +496,6 @@ export function SignupSection() {
             </span>
           </Button>
         </form>
-        {status === "error" ? (
-          <p className="mt-3 text-sm text-[#ffd0c6]" role="alert">
-            Enter an email address to start the campaign.
-          </p>
-        ) : null}
-        {status === "sent" ? (
-          <p className="mt-3 text-sm text-white" role="status">
-            {email.trim()} is on the list. We’ll open the first campaign from here.
-          </p>
-        ) : null}
         <div className="mt-24 border-t border-white/30 pt-8 text-right text-base">
           Scaleon 2026. all Rights Reserved
         </div>

@@ -4,7 +4,6 @@ import { createContext, useContext, useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { hasSignedIn } from "@/lib/account"
 import {
   Dialog,
   DialogContent,
@@ -40,11 +39,9 @@ export function useCampaign() {
 }
 
 export function useStartCampaign() {
-  const { setOpen } = useCampaign()
   const router = useRouter()
   return () => {
-    if (hasSignedIn()) setOpen(true)
-    else router.push("/sign-in")
+    router.push("/sign-in")
   }
 }
 

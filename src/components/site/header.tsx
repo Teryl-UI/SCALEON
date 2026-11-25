@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useStartCampaign } from "@/components/site/campaign"
 
@@ -77,10 +76,7 @@ export function Header({
             <a href="#contact">Contact</a>
           </nav>
         </div>
-        <div className="hidden h-full items-center gap-6 lg:flex">
-          <Link href="/sign-in" className="text-sm leading-5">
-            Sign in
-          </Link>
+        <div className="hidden h-full items-center lg:flex">
           <Button
             type="button"
             onClick={startCampaign}
@@ -123,9 +119,6 @@ export function Header({
           <a className="block py-2" href="#contact" onClick={() => setMenuOpen(false)}>
             Contact
           </a>
-          <Link className="block py-2" href="/sign-in" onClick={() => setMenuOpen(false)}>
-            Sign in
-          </Link>
           <Button
             type="button"
             onClick={() => {
