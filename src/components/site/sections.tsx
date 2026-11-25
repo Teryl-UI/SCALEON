@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import { Noto_Sans_Arabic } from "next/font/google"
 import Image from "next/image"
 import { CompoundCard } from "@/components/site/compound-card"
@@ -9,6 +10,7 @@ import { PositionCards } from "@/components/site/position-cards"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { CampaignButton } from "@/components/site/campaign"
+import { hasSignedIn } from "@/lib/account"
 import { LeadWorkspace } from "@/components/site/lead-workspace"
 
 const notoArabic = Noto_Sans_Arabic({
@@ -441,11 +443,16 @@ export function ReviewsSection() {
 }
 
 export function SignupSection() {
+  const router = useRouter()
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<"idle" | "error" | "sent">("idle")
 
   function submit(event: React.FormEvent) {
     event.preventDefault()
+    if (!hasSignedIn()) {
+      router.push("/sign-in")
+      return
+    }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       setStatus("error")
       return

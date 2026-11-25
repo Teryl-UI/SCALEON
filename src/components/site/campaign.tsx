@@ -2,7 +2,9 @@
 
 import { createContext, useContext, useState } from "react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { hasSignedIn } from "@/lib/account"
 import {
   Dialog,
   DialogContent,
@@ -37,6 +39,15 @@ export function useCampaign() {
   return value
 }
 
+export function useStartCampaign() {
+  const { setOpen } = useCampaign()
+  const router = useRouter()
+  return () => {
+    if (hasSignedIn()) setOpen(true)
+    else router.push("/sign-in")
+  }
+}
+
 export function ArrowMark() {
   return (
     <span className="inline-flex size-[22px] items-center justify-center">
@@ -56,11 +67,11 @@ export function CampaignButton({
   withArrow?: boolean
   className?: string
 }) {
-  const { setOpen } = useCampaign()
+  const startCampaign = useStartCampaign()
   return (
     <Button
       type="button"
-      onClick={() => setOpen(true)}
+      onClick={startCampaign}
       className={`h-auto gap-2 rounded-none px-3 py-3.5 text-sm font-medium text-white ${
         tone === "blue"
           ? "bg-[#0b50e9] hover:bg-[#0846cc]"

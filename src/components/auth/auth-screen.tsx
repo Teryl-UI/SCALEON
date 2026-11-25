@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { markSignedIn } from "@/lib/account"
 import { CompoundCard } from "@/components/site/compound-card"
 import { LaunchCard } from "@/components/site/launch-card"
 import { PositionCards } from "@/components/site/position-cards"
@@ -84,7 +85,10 @@ export function AuthScreen({ mode }: { mode: Mode }) {
     if (!confirm) next.confirm = "Confirm your password."
     else if (confirm !== password) next.confirm = "Passwords do not match."
     setErrors(next)
-    if (Object.keys(next).length === 0) router.push("/overview")
+    if (Object.keys(next).length === 0) {
+      markSignedIn()
+      router.push("/overview")
+    }
   }
 
   const current = slides[slide]

@@ -4,7 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { useCampaign } from "@/components/site/campaign"
+import { useStartCampaign } from "@/components/site/campaign"
 
 const growthLinks = [
   { label: "From first signal", href: "#signal" },
@@ -20,7 +20,7 @@ export function Header({
   className?: string
   showMenu?: boolean
 }) {
-  const { setOpen } = useCampaign()
+  const startCampaign = useStartCampaign()
   const [menuOpen, setMenuOpen] = useState(false)
   const [growthOpen, setGrowthOpen] = useState(false)
 
@@ -83,7 +83,7 @@ export function Header({
           </Link>
           <Button
             type="button"
-            onClick={() => setOpen(true)}
+            onClick={startCampaign}
             className="h-full rounded-none bg-[#e8472a] px-3 text-sm leading-5 font-normal text-white hover:bg-[#d13d22]"
           >
             Start a Campaign
@@ -130,7 +130,7 @@ export function Header({
             type="button"
             onClick={() => {
               setMenuOpen(false)
-              setOpen(true)
+              startCampaign()
             }}
             className="mt-2 h-auto rounded-none bg-[#e8472a] px-3 py-3 text-sm font-normal text-white hover:bg-[#d13d22]"
           >
